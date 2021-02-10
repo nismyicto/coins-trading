@@ -1,0 +1,135 @@
+<!--
+footer .affiliation h3 {
+top: 30px !important;
+}
+.language-en-us  footer .disclaimer small {
+    font-size: 11px;
+    line-height: 16px;
+}
+footer .headed-list>ul>li>a,footer .click-link{
+color:#686867;
+transition: color .125s ease,background-color .125s ease,border-color .3s ease;}
+footer .headed-list>ul>li>a:hover,footer .click-link:hover{
+color:#c3c3c3;}
+footer .click-link{
+font-size: 13px;}
+footer .ending-row {
+text-align: left;
+margin-top: 20px;}
+#learn-more-panel{
+display: block;
+margin-top: 3px;
+background-color: #2c2c2c;
+position: relative;
+float: none !important;
+text-align:center;}
+#learn-more-panel:hover{
+background-color: #353535;}
+#learn-more-panel img{
+display: inline-block;
+width: 83px;
+height: 59px;
+margin-top: 18px;
+margin-right: 27px;
+vertical-align: middle;}
+#learn-more-panel .download-mobile-cta-text {
+display: inline-block;
+vertical-align: middle;
+font-size: 20px;
+line-height: 24px;
+font-weight: 300;
+color: #cfcfcf;
+position: relative;
+cursor: pointer;
+margin-left: -4px;
+margin-top: 2px;}
+#learn-more-panel .download-mobile-cta-text-mob{
+color: #cfcfcf;
+cursor: pointer;
+display:none;}
+#learn-more-panel .anchor-wrap{
+width: 100%;
+height: 100%;
+position: absolute;
+display: block;
+z-index: 1;}
+.mobile-landing .language-en-us footer .footer-cta-wrapper #affiliate-login{
+padding-left:31px;}
+.mobile-landing .language-en-us footer .disclaimer{
+margin-top: 74px;}
+.language-en-us footer .footer-cta-wrapper #affiliate-login{
+padding-left: 31px;}
+@media (max-width: 1024px) and (min-width: 768px) {
+#learn-more-panel img{
+margin-right: 0px !important;}
+#learn-more-panel .download-mobile-cta-text {
+display: none;
+}
+#learn-more-panel .download-mobile-cta-text-mob {
+padding-top: 10px;
+padding-bottom: 18px;
+display: block;
+}
+.language-en-us #footer-mobile-app-cta .header, .language-en-us #footer-mobile-app-cta-mobile .header{
+display:none}
+}
+@media(max-width: 991px) {
+.mobile-landing .language-en-us footer .footer-cta-wrapper #affiliate-login {
+    text-align: center;
+    padding-left: 0px;
+}
+}
+@media(max-width: 768px) {
+footer .ending-row {
+margin-top: 21px;}
+#learn-more-panel .download-mobile-cta-text-mob{
+display: inline-block;
+vertical-align: middle;
+font-size: 14px;
+line-height: 18px;
+font-weight: 300;
+color: #cfcfcf;
+position: relative;}
+#learn-more-panel .download-mobile-cta-text{
+display:none}
+#learn-more-panel img{
+margin-right: 13px;
+margin-top: 17px;
+}
+}
+.ending-row a {
+    font-size: 11px;
+    line-height: 16px;
+    color: #686867;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+.ending-row a:hover {
+    color: #c3c3c3;
+    text-decoration: none !important;
+}
+.ending-row a:hover:after {
+   background-color: #c3c3c3;
+}
+.ending-row a:after {
+    -webkit-transition: background-color .125s ease;
+    -o-transition: background-color .125s ease;
+    transition: background-color .125s ease;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #343434;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.footer-copyright {
+    margin-top: 52px;
+    font-size: 11px;
+    line-height: 16px;
+    color: #686867;
+    position: relative;
+}
+-->
