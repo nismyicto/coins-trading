@@ -53,5 +53,10 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function investments()
+    {
+        return $this->hasMany('\App\Models\Investment');
+    }
     
 }

@@ -17,6 +17,7 @@
     <!-- <link href="{{url('/css/dropdm.css')}}" rel="stylesheet" /> -->
     <link href="{{url('/css/custom.css')}}" rel="stylesheet" />
     <link href="{{url('/css/footer.css')}}" rel="stylesheet" />
+
 </head>
 
 <body class="non-responsive language-en-us cashbackCurrency-36 userCurrency-392">
@@ -34,11 +35,9 @@
                             <div class="login last-child">
                                 <span class="status-bar-user hidden-logged-in last-child">
                                     <span class="status-bar-greetings first-child last-child">
-
                                         <a href="/GoToExternalLink?place=/account" class="btn btn-red btn-sm last-child">
                                             <span class="hidden-xs first-child">CLAIM YOUR $50 CASHBACK!</span>
                                         </a>
-
                                     </span>
                                 </span>
                             </div>
@@ -46,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="zone zone-navigation">
@@ -81,10 +79,7 @@
                                                 {{ Auth::user()->name }}
                                             </a>
                                         </li>
-
                                         <li>
-
-
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                 {{ __('Logout') }}
@@ -92,15 +87,7 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>
-
                                         </li>
-                                        @cannot('admin-user')
-                                        <div class="content">
-                                            <div class="d-flex justify-content-end text-white">
-                                                {{ Auth::user()->coins }}
-                                            </div>
-                                        </div>
-                                        @endcannot
                                         @endguest
                                     </ul>
                                 </div>
@@ -110,88 +97,34 @@
                         </div>
                     </nav>
                 </div>
-
-                <div class="dropdown-mega-menu trade-menu-toggle-bookmark toggler" data-hover-toggle="true" data-toggle-group="main-menu" data-toggle-target=".trade-menu-toggle-bookmark" data-toggle-class="open" role="menu">
-                    <div class="container content">
-                        <div class="row">
-                            <div class="col-sm-5 col-md-6 col-lg-7 dropdown-mega-menu--cta">
-                                <div class="dropdown-mega-menu--attention-grabber"><a id="quick-demo-link" href="/Account/QuickDemoLogin"> <img id="quick-demo-link--img" class="illustration" src="/themes/rtcm/content/images/platform-on-yellow.jpg" /> <img id="quick-demo-link--img--hover" class="illustration" src="/themes/rtcm/content/images/platform-on-yellow-hover.jpg" /> <span style="display: block;" class="dropdown-mega-menu--attention-grabber--heading">TRY HIGHLOW<br class="first-child" />WITH OUR FREE<br />QUICK DEMO <span class="quick-demo-link-arrow last-child"></span></span> </a></div>
-                            </div>
-                            <div class="col-sm-7 col-md-6 col-lg-5 clearfix dropdown-mega-menu--links">
-                                <ul>
-                                    <li><a id="trade-area-link" class="first-child last-child" href="//en.demotrade.highlow.net/"><small class="first-child">ACCESS THE</small><em>TRADE AREA</em><span class="btn-negative btn btn-extruded last-child">TRADE NOW</span></a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="/GoToExternalLink?place=/trade/trading-platforms">Trading Platforms</a></li>
-                                    <li><a href="/GoToExternalLink?place=/trade/option-types">Option Types</a></li>
-                                    <li><a href="/GoToExternalLink?place=/trade/trade-conditions">Trading Conditions</a></li>
-                                    <li><a href="/GoToExternalLink?place=/trade/options-schedule">Options Schedule</a></li>
-                                    <li><a href="/GoToExternalLink?place=/trade/expiry-rates">Expiry Rates</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dropdown-mega-menu highlow-menu-toggle-bookmark toggler" data-toggle-group="main-menu" data-hover-toggle="true" data-toggle-target=".highlow-menu-toggle-bookmark" data-toggle-class="open" role="menu">
-                    <div class="container content">
-                        <div class="row">
-                            <div class="col-sm-5 col-md-6 col-lg-7 dropdown-mega-menu--cta">
-                                <div class="dropdown-mega-menu--attention-grabber"><img src="/themes/rtcm/content/images/money-stack.jpg" class="illustration" />
-                                    <div class="dropdown-mega-menu--attention-grabber--heading">GET $50 <br />CASH-BACK <br />ON SIGN-UP <a href="/GoToExternalLink?place=/account" class="btn-negative btn btn-extruded">GO</a></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-7 col-md-6 col-lg-5 clearfix dropdown-mega-menu--links">
-                                <ul>
-                                    <li><a href="/GoToExternalLink?place=/overview">HighLow Overview</a></li>
-                                    <li><a href="/GoToExternalLink?place=/why-trade">Why Trade</a></li>
-                                    <li><a href="/GoToExternalLink?place=/banking">Banking</a></li>
-                                    <li><a href="/GoToExternalLink?place=/points">HighLow Points</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="/GoToExternalLink?place=/company">Company</a></li>
-                                    <li><a href="/GoToExternalLink?place=/help-and-support">Help and Support</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dropdown-mega-menu resources-menu-toggle-bookmark toggler" data-toggle-group="main-menu" data-hover-toggle="true" data-toggle-target=".resources-menu-toggle-bookmark" data-toggle-class="open" role="menu">
-                    <div class="container content">
-                        <div class="row">
-                            <div class="col-sm-5 col-md-6 col-lg-7 dropdown-mega-menu--cta">
-                                <div class="dropdown-mega-menu--attention-grabber">
-                                    <div class="dropdown-mega-menu--attention-grabber--heading">NEED HELP?<br />SEARCH FAQ&rsquo;S</div>
-                                    <form class="form contact-us-faq-form" method="get" action="/SearchResourcesExternal"><img src="/themes/rtcm/content/images/search-field-shadow.png" class="shadow" /> <input class="search-field form-control clearable" name="filter" placeholder="Enter a keyword" type="text" />
-                                        <div class="clearable--btn"></div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-sm-7 col-md-6 col-lg-5 clearfix dropdown-mega-menu--links">
-                                <ul>
-                                    <li><a href="/GoToExternalLink?place=/resources/overview">Resources Overview</a></li>
-                                    <li><a href="/GoToExternalLink?place=/resources/faq">FAQ's</a></li>
-                                    <li><a href="/Account/QuickDemoLogin">Quick Demo</a></li>
-                                    <li><a href="/GoToExternalLink?place=/resources/walk-through">Platform Walk-through</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="/GoToExternalLink?place=/resources/videos">Video Training</a></li>
-                                    <li><a href="/GoToExternalLink?place=/resources/options-glossary">Options Glossary</a></li>
-                                    <li><a style="visibility: hidden;">&nbsp;</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </article>
         </div>
-
     </header>
 
-
-    <div id="layout-before-main" class="group sticky-strip">
+    <div id="layout-before-main" class="group sticky-strip trows">
         <div class="content">
             <div class="zone zone-before-main">
-
+                <nav class="navbar navbar-default sticky-strip visible-logged-in" id="account-menu-bar-wrapper">
+                    <div class="content">
+                        <div id="account-menu-bar">
+                            <div class="container">
+                                <div id="account-balance" class="">
+                                    <div class="pull-right account-balance pt-4">
+                                        <h4 class="first-child">Account Balance</h4>
+                                        <span id="balance" class="balance-display balanceValue balanceArea last-child">@cannot('admin-user')
+                                            <div class="content">
+                                                <div class="d-flex justify-content-end text-white">
+                                                    {{ Auth::user()->coins ?? '0.00'}}
+                                                </div>
+                                            </div>
+                                            @endcannot
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>
@@ -214,7 +147,13 @@
                                                             <span id="ChangingStrike">HighLow</span><span class="closed hiddenArea">Closed</span>
                                                         </li>
                                                         <li class="gameTab" data-game="ChangingStrikeOOD">
-                                                            <span id="ChangingStrikeOOD">Turbo</span><span class="closed hiddenArea">Closed</span>
+                                                            <span id="ChangingStrikeOOD">HighLow Spread</span><span class="closed hiddenArea">Closed</span>
+                                                        </li>
+                                                        <li class="gameTab selected" data-game="ChangingStrike">
+                                                            <span id="ChangingStrike">Turbo</span><span class="closed hiddenArea">Closed</span>
+                                                        </li>
+                                                        <li class="gameTab" data-game="ChangingStrikeOOD">
+                                                            <span id="ChangingStrikeOOD">Turbo Spread</span><span class="closed hiddenArea">Closed</span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -798,8 +737,9 @@
 
                                                                             <div id="closingTime" class="closingTime trading-platform-instrument-closing-time eng first-child">13:00</div>
                                                                             <div id="timeRemaining" class="timeRemaining trading-platform-instrument-time-left eng">
-                                                                                <span class="time-left">12:03:48</span>
+                                                                                <span id="time">15:00</span>
                                                                             </div>
+
                                                                             <a class="trading-platform-instrument-one-click-toggler tooltip-container last-child">
                                                                                 <div class="tooltip one-touch first-child last-child hiddenArea" style="display: none; opacity: 0;">
                                                                                     <div class="title first-child">
@@ -861,48 +801,10 @@
                                                             </section>
 
                                                             <div id="chartContainer_All" class="chartContainer trading-platform-live-graph All chart_trade_bar">
-                                                                <div id="trading_chart"></div>
-                                                                <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+                                                                <div id="trading_chart">
 
-                                                                <script>
-                                                                    const chartProperties = {
-                                                                        width: 800,
-                                                                        height: 300,
-                                                                        timeScale: {
-                                                                            timeVisible: true,
-                                                                            secondVisible: false,
-                                                                        }
-                                                                    }
-
-                                                                    const domElement = document.getElementById('trading_chart');
-                                                                    const chart = LightweightCharts.createChart(domElement, chartProperties);
-                                                                    const candleSeries = chart.addCandlestickSeries();
-
-                                                                    fetch('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=1000')
-                                                                        .then(res => res.json())
-                                                                        .then(data => {
-                                                                            const cdata = data.map(d => {
-                                                                                return {
-                                                                                    time: d[0] / 1000,
-                                                                                    open: parseFloat(d[1]),
-                                                                                    high: parseFloat(d[2]),
-                                                                                    low: parseFloat(d[3]),
-                                                                                    close: parseFloat(d[4])
-                                                                                }
-                                                                            });
-
-                                                                            candleSeries.setData(cdata);
-                                                                        })
-                                                                        .catch(err => console.log(err));
-                                                                </script>
-                                                                <canvas class="mpchart-marker-background-color" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-back-marker" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-graph-canvas" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-canvas" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-graph-canvas" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-marker-background-border" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas><canvas class="mpchart-overlay" style="position: absolute; left: 0px; top: 0px; height: 300px; width: 792px;" height="300" width="792"></canvas>
-                                                                <div id="TradeContainer" style="position: absolute; top: 17px; left: 434.586px;"><a href="#" id="upLink"><canvas id="cUpButton" width="27" height="27"></canvas></a>
-                                                                    <div id="middleContainer" style="height: 34px"></div><a href="#" id="downLink"><canvas id="cDownButton" width="27" height="27"></canvas></a>
                                                                 </div>
-                                                                <div id="currentValue" data-modelkey="All" style="position: absolute; height: 32px; width: 32px; background-image: url(&quot;/Themes/RTCM/content/images/chart/current_value.png&quot;); top: 47.5px; left: 397.086px;">
-                                                                    <div id="bkgPoint" style="position: absolute; background: url(&quot;/Themes/RTCM/content/images/chart/current_value_bkg.png&quot;) center center; width: 32px; height: 32px;"></div>
-                                                                    <div id="strikePoint" style="position: absolute; background: url(&quot;/Themes/RTCM/content/images/chart/current_value.png&quot;) center center; width: 32px; height: 32px;"></div>
-                                                                </div>
+
                                                             </div>
 
                                                             <section id="tradeActionMessageRegion">
@@ -939,36 +841,82 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <form action="{{route('users.store', $user)}}" method="POST" enctype="multipart/form-data">
-                                                                                    {{ method_field('PUT') }}
+                                                                                <form action="{{route('invest.store')}}" method="POST" enctype="multipart/form-data">                                                                        
                                                                                     {{ csrf_field() }}
                                                                                     <div class="sums">
                                                                                         <div class="amountBox trading-platform-main-controls-investment font-m">
                                                                                             <span>$</span>
-                                                                                            <input type="text" maxlength="10" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
+                                                                                            <input type="text" maxlength="10" name="amount" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
                                                                                         </div>
                                                                                         <div class="amount-area trading-platform-main-controls-common-amount">
-                                                                                            <div class="defaultAmount" val="50">$50</div>
+                                                                                            <div class="defaultAmount" val="50" onclick="myFunction50()">$50</div>
                                                                                             <div class="defaultAmountSeparator"></div>
-                                                                                            <div class="defaultAmount" val="100">$100</div>
+                                                                                            <div class="defaultAmount" val="100" onclick="myFunction100()">$100</div>
                                                                                             <div class="defaultAmountSeparator"></div>
-                                                                                            <div class="defaultAmount" val="500">$500</div>
+                                                                                            <div class="defaultAmount" val="500" onclick="myFunction500()">$500</div>
                                                                                         </div>
+                                                                                        <script>
+                                                                                            //$(document).ready(function() {
+                                                                                                function myFunction50() {
+                                                                                                    document.getElementById("amount").value = "50";
+                                                                                                }
+
+                                                                                                function myFunction100() {
+                                                                                                    document.getElementById("amount").value = "100";
+                                                                                                }
+
+                                                                                                function myFunction500() {
+                                                                                                    document.getElementById("amount").value = "500";
+                                                                                                }
+
+                                                                                                function startTimer(duration, display) {
+                                                                                                    var timer = duration,
+                                                                                                        minutes, seconds;
+                                                                                                    setInterval(function() {
+                                                                                                        minutes = parseInt(timer / 60, 10);
+                                                                                                        seconds = parseInt(timer % 60, 10);
+
+                                                                                                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                                                                                                        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                                                                                                        display.textContent = minutes + ":" + seconds;
+
+                                                                                                        if (--timer < 0) {
+                                                                                                            timer = duration;
+                                                                                                        }
+                                                                                                    }, 1000);
+                                                                                                }
+
+                                                                                                window.onload = function() {
+                                                                                                    var fifteenMinutes = 60 * 15,
+                                                                                                        display = document.querySelector('#time');
+                                                                                                    startTimer(fifteenMinutes, display);
+                                                                                                };
+
+                                                                                                $('#bid_state_button').on('click', function() {
+                                                                                                    if ($('div[name=up_button]').click) {
+                                                                                                        document.getElementById("bid_state_button").value = 'H';
+                                                                                                    } else {
+                                                                                                        document.getElementById("bid_state_button").value = 'L';
+                                                                                                    }
+                                                                                                })
+                                                                                            //})
+                                                                                        </script>
                                                                                     </div>
                                                                                     <div class="invest-area clearfix trading-platform-main-controls-options none-one-click-control">
                                                                                         <div class="trading-platform-main-controls-select-direction first-child">
                                                                                             <div class="subGraph-updown">
                                                                                                 <div class="subGraph-up">
-                                                                                                    <div class="up button" id="up_button">High</div>
+                                                                                                    <div class="up button" id="bid_state_button" name="up_button" onclick="upButton()">High</div>
                                                                                                 </div>
                                                                                                 <div class="subGraph-down">
-                                                                                                    <div class="dwn button" id="down_button">Low</div>
+                                                                                                    <div class="dwn button" id="bid_state_button" name="down_button">Low</div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="invest-btn trading-platform-main-controls-place-bet last-child">
 
-                                                                                            <a class="invest investNow_disabled button" id="invest_now_button" href="javascript:;" style="display: block;">Invest</a>
+                                                                                            <button type="submit" class="invest investNow_disabled button" id="invest_now_button" style="display: block;">Invest</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </form>
@@ -1021,339 +969,6 @@
                                         </ul>
                                     </div>
                                 </section>
-
-
-                                <script type="text/html" id="template-tradeAreaNoItems">
-                                    <div class="trading-platform-loading-screen">
-                                        <div class="header">
-                                            LOADING <span class="loading-icon"></span>
-                                        </div>
-                                        <div class="loading-bar">
-                                            <div class="fill">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-tradeAreaItem">
-                                    <section id="chartHeaderZoneRegion"></section>
-                                    <section id="chartContainerRegion"></section>
-                                </script>
-
-                                <script type="text/html" id="template-tradeAreas">
-                                    <ul id="tradeAreas"></ul>
-                                </script>
-
-                                <script type="text/html" id="template-ChartHeaderZoneView">
-                                    <div class="chartHeaderZone" id="chartHeaderZone">
-                                        <div class="optionExpiresArea">
-                                            <div id="carouselArea" class="carouselArea">
-                                            </div>
-                                        </div>
-                                        <div class="chart-header-info panel-header">
-                                            <div id="strikeAreaRegion"></div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-carousel">
-                                    <div class="carouselButton left">
-                                        <div id="leftButton" class="inner">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                    <div id="tradeBoxStrip" class="carousel_container">
-                                        <div class="slider-fade left"></div>
-                                        <div class="no-data hiddenArea others">Currently there are no options</div>
-                                        <div class="no-data hiddenArea favorites">You currently have no favorites</div>
-                                        <div id="carousel" class="carousel">
-                                            <div id="carousel_container" style="position: relative"></div>
-                                        </div>
-                                        <div class="slider-fade right"></div>
-                                    </div>
-                                    <div class="carouselButton right">
-                                        <div id="rightButton" class="inner">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-tradeBox">
-                                    <div class="instrument-panel-header">
-                                        <div class="instrument-panel-title eng" id="assetName"><%= assetName%></div>
-                                        <%if (MP.favoritesCategory) { %>
-                                        <a title="Add to favorites" class="instrument-panel-favourite favoritesIcon hiddenArea"></a>
-                                        <% } %>
-                                        <div class="instrument-panel-duration">
-                                            <span class="duration"></span>
-                                        </div>
-                                    </div>
-                                    <div class="instrument-panel-body <%= optionType%>">
-                                        <div class="clearfix first-child">
-                                            <div class="instrument-panel-payout-wrap pull-left clearfix ProfitValue">
-                                                <div class="font-sb returnRateLabel">Payout</div>
-                                                <div class="instrument-panel-payout eng returnRate"><%=((returnRate / 100) + 1).toFixed(2)%></div>
-                                            </div>
-                                            <div class="pull-left clearfix">
-                                                <div class="instrument-panel-rate eng">
-                                                    <div class="upBoundary"></div>
-                                                    <div class="strike-value">
-                                                        <span class="arrows">
-                                                            <span class="trend"></span>
-                                                        </span>
-                                                        <span class="strike"></span>
-                                                    </div>
-                                                    <div class="downBoundary"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="instrument-panel-closing assetTime last-child closing-at time"></div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-strikeAreaRegion">
-                                    <div id="strikeArea" class="strikeArea pull-left first-child">
-                                        <%if (key != 'NoItems') { %>
-                                        <span id="asset" class="trading-platform-instrument-title font-sb eng first-child"></span>
-                                        <span id="direction" class="strike-direction trading-platform-instrument-direction"></span>
-                                        <span id="strike" class="trading-platform-instrument-rate eng current-rate"></span>
-                                        <span id="pipRange" class="trading-platform-instrument-spread-range last-child eng"></span>
-                                        <span id="tradingClosed" class="trading-platform-instrument-trading-is-closed hiddenArea">Trading is closed</span>
-                                        <span id="openingTime" class="trading-platform-instrument-open-time last-child hiddenArea"></span>
-                                        <span class="loading-icon hiddenArea"></span>
-                                        <% } %>
-                                    </div>
-                                    <div class="chartTimeArea pull-right last-child">
-                                        <%if (key != 'NoItems') { %>
-                                        <div id="closingTime" class="closingTime trading-platform-instrument-closing-time eng first-child"></div>
-                                        <div id="timeRemaining" class="timeRemaining trading-platform-instrument-time-left eng">
-                                            <span class="time-left hiddenMode"></span>
-                                        </div>
-                                        <a class="trading-platform-instrument-one-click-toggler tooltip-container last-child">
-                                            <div class="tooltip one-touch first-child last-child hiddenArea">
-                                                <div class="title first-child">
-                                                    One Click Trading
-                                                </div>
-                                                <div class="content last-child">
-                                                    <p class="first-child">Switch to One Click Trading for faster trade execution. </p>
-                                                    <p class="last-child">Note: When switched on, One Click Trading will be active on both the chart and trade panel.</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <% } %>
-                                    </div>
-                                    <div class="clearfix">
-                                        <%if (key == 'NoItems') { %>
-                                        <div id="chartMessage" class="trading-platform-instrument-trading-is-closed">Trading is closed</div>
-                                        <% } %>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-chartContainerView">
-                                    <section class="chartArea">
-                                        <div id="noItemsMessage hiddenArea"></div>
-                                        <section id="tradeBarRegion"></section>
-
-                                        <div id="chartContainer_<%= key %>" class="chartContainer trading-platform-live-graph <%= key %>"></div>
-
-                                        <section id="tradeActionMessageRegion"></section>
-                                        <section id="tradingModeRegion"></section>
-                                        <section id="tradingZoneRegion" class="trading-platform-main-controls last-child"></section>
-                                        <section id="tradingZonePopupRegion"></section>
-                                        <div class="clearfix"></div>
-                                    </section>
-                                </script>
-
-                                <script type="text/html" id="template-tradingModeRegion">
-                                    <div id="tradeModeArea" class="trade_mode_area hiddenArea">
-                                        <input type="checkbox" id="tradingMode" name="trading-mode" />
-
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-tradeBarRegion">
-                                    <div id="tradeBar" class="trade_bar tooltip-container">
-                                        <div class="trade_bar_content">
-                                            <div id="TradeUp" class="top label high eng"><span id="PercentUp">0</span>%</div>
-                                            <div class="middle">
-                                                <div class="bar_label">Traders Choice</div>
-                                                <div class="bar">
-                                                    <div id="ProgressUp" class="progressUp"></div>
-                                                    <div id="ProgressDown" class="progressDown"></div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div id="TradeDown" class="bottom label low eng"><span id="PercentDown">0</span>%</div>
-                                        </div>
-                                        <div class="toggle"></div>
-                                    </div>
-
-                                    <div id="tradeBarSeparator" class="tooltip-container hiddenArea"></div>
-
-                                    <div class="trader-choice tooltip hiddenArea">
-                                        <div class="title">
-                                            Traders Choice
-                                        </div>
-                                        <div class="content">
-                                            View recent decisions by other traders with our Traders Choice sentiment indicator.
-                                        </div>
-                                    </div>
-                                </script>
-
-
-                                <script type="text/html" id="template-tradeActionMessageView">
-                                    <div id="trade_action_message">
-                                        <div id="notification_container" class="message-wrapper">
-                                            <span id="notification_text" class="message"></span>
-                                        </div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-tradingZone">
-                                    <div id="trading_zone" class="subGraph">
-                                        <div id="trading_zone_content">
-                                            <div class="trading-platform-enabled-mode trading-ticket-invest">
-                                                <div id="changing_strike_trading_zone" class="changing-strike-area">
-                                                    <div id="asset" class="strike_asset trading-platform-main-controls-instrument-title font-sb eng first-child"></div>
-                                                    <div class="trading-platform-main-controls-live-rate">
-                                                        <div class="pull-right last-child">
-                                                            <div class="strikeValue">
-                                                                <span id="direction"></span>
-                                                                <span class="strike eng"></span>
-                                                                <span class="pipRange eng"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="sums">
-                                                    <div class="amountBox trading-platform-main-controls-investment font-m">
-                                                        <span>$</span>
-                                                        <input type="text" maxlength="10" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
-                                                    </div>
-                                                    <div class="amount-area trading-platform-main-controls-common-amount">
-                                                        <div class='defaultAmount' val='50'>$50</div>
-                                                        <div class='defaultAmountSeparator'></div>
-                                                        <div class='defaultAmount' val='100'>$100</div>
-                                                        <div class='defaultAmountSeparator'></div>
-                                                        <div class='defaultAmount' val='500'>$500</div>
-                                                    </div>
-                                                </div>
-                                                <div class="invest-area clearfix trading-platform-main-controls-options none-one-click-control">
-                                                    <div class="trading-platform-main-controls-select-direction first-child">
-                                                        <div class="subGraph-updown">
-                                                            <div class="subGraph-up">
-                                                                <div class="up button" id="up_button">High</div>
-                                                            </div>
-                                                            <div class="subGraph-down">
-                                                                <div class="dwn button" id="down_button">Low</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invest-btn trading-platform-main-controls-place-bet last-child">
-                                                        <a class="invest investNow_disabled button" id="invest_now_button" href="javascript:;">Invest</a>
-                                                    </div>
-                                                </div>
-                                                <div class="trading-platform-main-controls-payout">
-                                                    <div class="pull-left font-sb first-child">Payout</div>
-                                                    <div class="pull-right last-child">
-                                                        <span id="PayoutIn" class="trading-platform-main-controls-payout-rate eng first-child last-child"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="trading-platform-main-controls-return last-child">
-                                                    <div class="pull-left font-sb first-child">Return</div>
-                                                    <div id="cashPayout" class="pull-right trading-platform-maximum-return eng last-child"></div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div class="trading-platform-disabled-mode trading-ticket-view hiddenArea">
-                                                <div class="trading-platform-disabled-title">Trading is closed</div>
-                                                <div class="trading-platform-disabled-timer-countdown">
-                                                    <div class="title">Market reopens in</div>
-                                                    <div class="timer">
-                                                        <div class="cell days">00</div>
-                                                        <div class="cell hours">00</div>
-                                                        <div class="cell minutes">00</div>
-                                                        <div class="cell seconds">00</div>
-                                                    </div>
-                                                    <div class="timer-hints">
-                                                        <div class="cell days">DAYS</div>
-                                                        <div class="cell hours">HRS</div>
-                                                        <div class="cell minutes">MINS</div>
-                                                        <div class="cell seconds">SECS</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </script>
-
-                                <script type="text/html" id="template-tradingZonePopup">
-                                    <div id="quickTradeContainer"></div>
-                                    <div id="sellTradeActionContainer"></div>
-                                </script>
-
-                                <script type="text/html" id="template-tradingZoneQuickTradePopup">
-                                    <div id="quickTradeDiv" class="buyDiv trading-platform-popup" style="display: none;">
-                                        <div class="trading-platform-popup-header first-child">
-                                            Invest
-                                            <div class="trading-platform-popup-close close first-child last-child"></div>
-                                        </div>
-                                        <div class="trading-platform-popup-body last-child">
-                                            <div class="trading-platform-invest-popup-live-rate first-child">
-                                                <div class="trading-platform-main-controls-instrument-title pull-left font-sb first-child">
-                                                    <span id="asset" class="strike_area_asset strike_area_text"></span>
-                                                </div>
-                                                <div class="pull-right current-rate last-child">
-                                                    <div class="strikeValue">
-                                                        <span id="direction"></span>
-                                                        <span class="strike strike_area_text eng"></span>
-                                                        <span class="pipRange hiddenArea"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="trading-platform-invest-popup-payout">
-                                                <div class="pull-left font-sb first-child">
-                                                    Payout
-                                                </div>
-                                                <div class="pull-right last-child">
-                                                    <span id="Payout" class="trading-platform-main-controls-payout-rate first-child last-child eng"></span>
-                                                </div>
-                                            </div>
-                                            <div class="sums">
-                                                <div class="amountBox trading-platform-main-controls-investment font-m">
-                                                    <span>$</span>
-                                                    <input type="text" maxlength="10" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
-                                                </div>
-                                                <div class="amount-area trading-platform-main-controls-common-amount">
-                                                    <div class='defaultAmount' val='50'>$50</div>
-                                                    <div class='defaultAmountSeparator'></div>
-                                                    <div class='defaultAmount' val='100'>$100</div>
-                                                    <div class='defaultAmountSeparator'></div>
-                                                    <div class='defaultAmount' val='500'>$500</div>
-                                                </div>
-                                            </div>
-                                            <div class="invest-area clearfix trading-platform-main-controls-options none-one-click-control">
-                                                <div class="trading-platform-main-controls-select-direction first-child">
-                                                    <div class="subGraph-updown">
-                                                        <div class="subGraph-up">
-                                                            <div class="up button" id="up_button">High</div>
-                                                        </div>
-                                                        <div class="subGraph-down">
-                                                            <div class="dwn button" id="down_button">Low</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="invest-btn trading-platform-main-controls-place-bet last-child">
-                                                    <a id="quickTradeInvestBtn" class=" invest investnow_disabled button" href="javascript:;">Invest</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </script>
-
-
-
                             </div>
 
                             <div class="container trading-app-holiday">
@@ -1438,152 +1053,7 @@
 
     <div id="layout-footer" class="group">
         <footer id="footer">
-            <div class="zone zone-footer">
-                <article class="widget-appstorewebapppopupen widget-footer widget-html-widget widget">
-                    <p>
-                        <link rel="stylesheet" type="text/css" href="/Media/RTCMDynamicPopUp/dynamic-popup.min.css" />
-                    </p>
-                    <div class="header-modal-dialogs">
-                        <div class="modal fade" id="dynamic-popup" tabindex="-1" role="dialog">
-                            <div class="modal-dialog-wrapper">
-                                <div class="modal-dialog-center">
-                                    <div class="modal-dialog">
-                                        <div class="modal-body">
-                                            <div class="body-left">
-                                                <div class="heading"></div>
-                                                <div class="my-wrap">
-                                                    <div class="input-wrap label-on-top cst-scr-bar"></div>
-                                                    <div class="bot-shadow"></div>
-                                                </div>
-                                            </div>
-                                            <div class="body-right"><img id="pop-up-image" alt="Pop-up image" /></div>
-                                        </div>
-                                        <div class="modal-footer clearfix">
-                                            <div class="left-button-anc"><a class="left-button" href="javascript:" id="lft-btn">A</a></div>
-                                            <div class="follow-anc"><a class="right-button" id="rght-btn" href="javascript:">B</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>
-                        <script type="text/javascript">
-                            // <![CDATA[
-                            $(document).ready(function() {
-                                $("#footer-apple-icon.webapp-trading").click(function(o) {
-                                    (o.preventDefault(), o.stopPropagation(), $("#dynamic-popup .heading").html("Trading HighLow on your iOS device"), $("#dynamic-popup .input-wrap").html('The HighLow native app for iOS is no longer supported, but customers using iPhone and iPad can still trade HighLow on their smartphone browser.<p style="margin-bottom: 10px;"></p>Try the HighLow mobile web app by going to highlow.net on your mobile.'), $("#dynamic-popup #pop-up-image").attr("src", "/Themes/RTCM/Content/images/ios-shutdown.svg"), $("#dynamic-popup .left-button").addClass("close-anc"), $("#dynamic-popup .left-button").text("Close"), $("#dynamic-popup .left-button").show(), $("#dynamic-popup .bot-shadow").hide(), $("#dynamic-popup #lft-btn").unbind("click"), $("#dynamic-popup #rght-btn").unbind("click"), window.matchMedia("(max-width: 768px)").matches) && ($("#dynamic-popup .input-wrap").html('<p style="text-align: start;">The HighLow native app for iOS is no longer supported, but customers using iPhone and iPad can still trade HighLow on their smartphone browser.</p><p style="margin-bottom: 10px;"></p><p style="text-align: start;">Try the HighLow mobile web app by going to highlow.net on your mobile.</p>'), i.appendTo("#dynamic-popup .label-on-top"), $("#dynamic-popup .modal-dialog").css("max-height", $(window).height() - 30), $(".mobile-landing #header").show(), $("#dynamic-popup .modal-dialog").addClass("mobile-view"), /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && ($("#dynamic-popup .bot-shadow").appendTo("#dynamic-popup .modal-body"), $("#dynamic-popup .bot-shadow").show(), $("#dynamic-popup .body-left").addClass("hidden-psd"), $("body").addClass("noscroll"), $(".customNavBar .navBarHeader").css("visibility", "hidden"), $(".customNavBar .navbar-toggle").css("visibility", "hidden")));
-                                    return $("#dynamic-popup").modal(), $("#dynamic-popup #lft-btn").click(function() {
-                                        a(), $("#dynamic-popup").modal("hide")
-                                    }), $("#dynamic-popup #rght-btn").click(function() {
-                                        a(), -1 !== window.location.pathname.indexOf("mobile") ? ($("#dynamic-popup").modal("hide"), window.location.href = "/trading") : ($("#dynamic-popup").modal("hide"), document.body.scrollTop = 0, document.documentElement.scrollTop = 0)
-                                    }), !1
-                                });
-                                var i = $("#dynamic-popup .body-right");
-
-                                function a() {
-                                    window.matchMedia("(max-width: 768px)").matches && ($(".mobile-landing #header").hide(), $("body").removeClass("noscroll"), $(".customNavBar .navBarHeader").css("visibility", "visible"), $(".customNavBar .navbar-toggle").css("visibility", "visible"))
-                                }
-                                window.addEventListener("resize", function() {
-                                    $("#dynamic-popup .modal-dialog.mobile-view").css("max-height", $(window).height() - 30)
-                                }, !1);
-                                var o = $("#dynamic-popup");
-                                o.on("show.bs.modal", function() {
-                                    o.css("visibility", "visible"), $("body").addClass("modal-open")
-                                }).on("hidden.bs.modal", function() {
-                                    o.css("visibility", "hidden"), $("body").removeClass("modal-open").removeAttr("style")
-                                })
-                            });
-                            // ]]>
-                        </script>
-                    </p>
-                </article>
-                <article class="widget-footeren widget-footer widget-html-widget widget">
-                    <p></p>
-                    <div class="container">
-                        <div class="clearfix">
-                            <div class="row first-child">
-                                <div class="affiliation-wrapper col-sm-9 first-child">
-                                    <div class="affiliation first-child last-child">
-                                        <h3 class="first-child">HighLow Markets partners with trusted, secure &amp; regulated businesses</h3>
-                                        <div class="clearfix last-child">
-                                            <!--empty-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer-cta-wrapper col-sm-3 last-child"><a href="/GoToExternalLink?place=/affiliates/sign-in" class="block first-child" id="affiliate-login">Affiliates login <span class="affiliate-icon"></span></a>
-                                    <div id="footer-mobile-app-cta-mobile" class="last-child">
-                                        <h3 class="block header">Download HighLow for your mobile</h3>
-                                        <div class="clearfix"><a href="/GoToExternalLink?place=/resources/downloads/android" id="footer-android-icon" class="icon block pull-left"> Android </a> <a href="https://itunes.apple.com/us/app/highlow-binary-options/id762015915?mt=8" id="footer-apple-icon" class="icon block pull-right"> App Store </a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix">
-                            <div class="col-xs-12 keyline"></div>
-                            <div class="row">
-                                <div class="col-sm-9 first-child">
-                                    <div class="headed-list small-text pull-left">
-                                        <h4 class="footer-links-group-heading header block">Trade</h4>
-                                        <ul class="footer-links-list">
-                                            <li><a href="/">Access Trade Area</a></li>
-                                            <li><a href="/GoToExternalLink?place=/trade/trading-platforms">Trading Platforms</a></li>
-                                            <li><a href="/GoToExternalLink?place=/trade/option-types">Option Types</a></li>
-                                            <li><a href="/GoToExternalLink?place=/trade/trade-conditions">Trading Conditions</a></li>
-                                            <li><a href="/GoToExternalLink?place=/trade/options-schedule">Option Schedule</a></li>
-                                            <li><a href="/GoToExternalLink?place=/trade/expiry-rates">Expiry Rates</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="headed-list small-text pull-left">
-                                        <h4 class="footer-links-group-heading header block">HighLow</h4>
-                                        <ul class="footer-links-list">
-                                            <li><a href="/GoToExternalLink?place=/overview">HighLow Overview</a></li>
-                                            <li><a href="/GoToExternalLink?place=/why-trade">Why Trade</a></li>
-                                            <li><a href="/GoToExternalLink?place=/banking">Banking</a></li>
-                                            <li><a href="/GoToExternalLink?place=/points">HighLow Points</a></li>
-                                            <li><a href="/GoToExternalLink?place=/company">Company</a></li>
-                                            <li><a href="/GoToExternalLink?place=/help-and-support">Help And Support</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="headed-list small-text pull-left">
-                                        <h4 class="footer-links-group-heading header block">Resources</h4>
-                                        <ul class="footer-links-list">
-                                            <li><a href="/GoToExternalLink?place=/resources/faq">FAQ</a></li>
-                                            <li><a href="/Account/QuickDemoLogin">Quick Demo</a></li>
-                                            <li><a href="/GoToExternalLink?place=/resources/walk-through">Platform Walkthrough</a></li>
-                                            <li><a href="/GoToExternalLink?place=/resources/options-glossary">Options Glossary</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="headed-list small-text pull-left">
-                                        <h4 class="footer-links-group-heading header block">Members</h4>
-                                        <ul class="footer-links-list">
-                                            <li><a href="/GoToExternalLink?place=/login">Login</a></li>
-                                            <li><a href="/GoToExternalLink?place=/forgot-password">Forgotten Password</a></li>
-                                            <li><a href="/GoToExternalLink?place=/my-account/dashboard">My Account</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 last-child">
-                                    <div id="footer-mobile-app-cta" class="first-child last-child">
-                                        <h3 class="block header">Trade HighLow on your mobile device</h3>
-                                        <div class="clearfix">
-                                            <div id="learn-more-panel"><a href="/GoToExternalLink?place=/trade/trading-platforms" class="anchor-wrap"></a>
-                                                <div class="download-mobile-cta"><img src="images/learn-more-mobile.png" /> <span class="download-mobile-cta-text">Learn more</span> <span class="download-mobile-cta-text-mob">Trade HighLow on <br />your mobile device</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br /> <br />
-                        <div class="clearfix disclaimer">
-                            <h5 class="disclaimerHeader">General Advice Disclaimer.</h5>
-                            <small>This website and the financial products issued herein, is published and owned by HighLow Markets Pty Ltd (ACN 143 553 628), holder of Australian Financial Services Licence number 364264. You should satisfy yourself that entry into a financial product offered by HighLow Markets Pty Ltd is permissible in your jurisdiction. The information on this site is of a general nature only. To the extent any advice is provided, it is general advice only and does not take into account your objectives, financial situation or needs. Before acting on any advice, you should consider the appropriateness of the advice having regard your objectives, financial situation and needs, consult your own professional advisors and obtain a copy of and read the Product Disclosure Statement, Financial Services Guide and Account Terms and Conditions and our Privacy Policy, before making an investment decision. Dealing in foreign exchange contracts and our other over-the-counter derivative products carries significant risk. You may lose all of your initial investment and you may also incur losses that exceed your initial investment. Functions like payment processing, market data and financial commentaries may be powered by our UK subsidiary, HighLow Markets Ltd, Medius House, 2 Sheraton Street, London, W1F 8BH, United Kingdom. <br /> We do not provide or allow managed discretionary account services on our accounts. You must only trade on your own account and you are warned we have broad powers to enforce our Account Terms and Conditions.</small>
-                        </div>
-                        <p class="ending-row"><a class="click-link" href="/GoToExternalLink?place=/terms-and-agreements">Terms and Agreements</a> <span class="footer-copyright"> | &copy; 2020 HighLow Markets Pty Ltd. All rights reserved.</span></p>
-                    </div>
-                </article>
-            </div>
+            @include('layouts.footer')
         </footer>
     </div>
 
@@ -1657,5 +1127,1199 @@
     <div class="onboarding-overlay"></div>
 
 </body>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+<script>
+    const chartProperties = {
+        width: 800,
+        height: 300,
+        timeScale: {
+            timeVisible: true,
+            secondVisible: false,
+        },
+    }
+
+    const domElement = document.getElementById('trading_chart');
+    const chart = LightweightCharts.createChart(domElement, chartProperties);
+    chart.applyOptions({
+        layout: {
+            backgroundColor: '#353535',
+            textColor: '#ffe048',
+            fontSize: 12,
+            fontFamily: 'Calibri',
+        },
+        grid: {
+            vertLines: {
+                color: '#353535',
+                style: 1,
+                visible: true,
+            },
+            horzLines: {
+                color: '#353535',
+                style: 1,
+                visible: true,
+            },
+        },
+    });
+
+    var candleSeries = chart.addCandlestickSeries();
+
+    var data = [{
+            time: '2018-10-19',
+            open: 54.62,
+            high: 55.50,
+            low: 54.52,
+            close: 54.90
+        },
+        {
+            time: '2018-10-22',
+            open: 55.08,
+            high: 55.27,
+            low: 54.61,
+            close: 54.98
+        },
+        {
+            time: '2018-10-23',
+            open: 56.09,
+            high: 57.47,
+            low: 56.09,
+            close: 57.21
+        },
+        {
+            time: '2018-10-24',
+            open: 57.00,
+            high: 58.44,
+            low: 56.41,
+            close: 57.42
+        },
+        {
+            time: '2018-10-25',
+            open: 57.46,
+            high: 57.63,
+            low: 56.17,
+            close: 56.43
+        },
+        {
+            time: '2018-10-26',
+            open: 56.26,
+            high: 56.62,
+            low: 55.19,
+            close: 55.51
+        },
+        {
+            time: '2018-10-29',
+            open: 55.81,
+            high: 57.15,
+            low: 55.72,
+            close: 56.48
+        },
+        {
+            time: '2018-10-30',
+            open: 56.92,
+            high: 58.80,
+            low: 56.92,
+            close: 58.18
+        },
+        {
+            time: '2018-10-31',
+            open: 58.32,
+            high: 58.32,
+            low: 56.76,
+            close: 57.09
+        },
+        {
+            time: '2018-11-01',
+            open: 56.98,
+            high: 57.28,
+            low: 55.55,
+            close: 56.05
+        },
+        {
+            time: '2018-11-02',
+            open: 56.34,
+            high: 57.08,
+            low: 55.92,
+            close: 56.63
+        },
+        {
+            time: '2018-11-05',
+            open: 56.51,
+            high: 57.45,
+            low: 56.51,
+            close: 57.21
+        },
+        {
+            time: '2018-11-06',
+            open: 57.02,
+            high: 57.35,
+            low: 56.65,
+            close: 57.21
+        },
+        {
+            time: '2018-11-07',
+            open: 57.55,
+            high: 57.78,
+            low: 57.03,
+            close: 57.65
+        },
+        {
+            time: '2018-11-08',
+            open: 57.70,
+            high: 58.44,
+            low: 57.66,
+            close: 58.27
+        },
+        {
+            time: '2018-11-09',
+            open: 58.32,
+            high: 59.20,
+            low: 57.94,
+            close: 58.46
+        },
+        {
+            time: '2018-11-12',
+            open: 58.84,
+            high: 59.40,
+            low: 58.54,
+            close: 58.72
+        },
+        {
+            time: '2018-11-13',
+            open: 59.09,
+            high: 59.14,
+            low: 58.32,
+            close: 58.66
+        },
+        {
+            time: '2018-11-14',
+            open: 59.13,
+            high: 59.32,
+            low: 58.41,
+            close: 58.94
+        },
+        {
+            time: '2018-11-15',
+            open: 58.85,
+            high: 59.09,
+            low: 58.45,
+            close: 59.08
+        },
+        {
+            time: '2018-11-16',
+            open: 59.06,
+            high: 60.39,
+            low: 58.91,
+            close: 60.21
+        },
+        {
+            time: '2018-11-19',
+            open: 60.25,
+            high: 61.32,
+            low: 60.18,
+            close: 60.62
+        },
+        {
+            time: '2018-11-20',
+            open: 61.03,
+            high: 61.58,
+            low: 59.17,
+            close: 59.46
+        },
+        {
+            time: '2018-11-21',
+            open: 59.26,
+            high: 59.90,
+            low: 58.88,
+            close: 59.16
+        },
+        {
+            time: '2018-11-23',
+            open: 58.86,
+            high: 59.00,
+            low: 58.29,
+            close: 58.64
+        },
+        {
+            time: '2018-11-26',
+            open: 58.64,
+            high: 59.51,
+            low: 58.31,
+            close: 59.17
+        },
+        {
+            time: '2018-11-27',
+            open: 59.21,
+            high: 60.70,
+            low: 59.18,
+            close: 60.65
+        },
+        {
+            time: '2018-11-28',
+            open: 60.70,
+            high: 60.73,
+            low: 59.64,
+            close: 60.06
+        },
+        {
+            time: '2018-11-29',
+            open: 59.42,
+            high: 59.79,
+            low: 59.26,
+            close: 59.45
+        },
+        {
+            time: '2018-11-30',
+            open: 59.57,
+            high: 60.37,
+            low: 59.48,
+            close: 60.30
+        },
+        {
+            time: '2018-12-03',
+            open: 59.50,
+            high: 59.75,
+            low: 57.69,
+            close: 58.16
+        },
+        {
+            time: '2018-12-04',
+            open: 58.10,
+            high: 59.40,
+            low: 57.96,
+            close: 58.09
+        },
+        {
+            time: '2018-12-06',
+            open: 58.18,
+            high: 58.64,
+            low: 57.16,
+            close: 58.08
+        },
+        {
+            time: '2018-12-07',
+            open: 57.91,
+            high: 58.43,
+            low: 57.34,
+            close: 57.68
+        },
+        {
+            time: '2018-12-10',
+            open: 57.80,
+            high: 58.37,
+            low: 56.87,
+            close: 58.27
+        },
+        {
+            time: '2018-12-11',
+            open: 58.77,
+            high: 59.40,
+            low: 58.63,
+            close: 58.85
+        },
+        {
+            time: '2018-12-12',
+            open: 57.79,
+            high: 58.19,
+            low: 57.23,
+            close: 57.25
+        },
+        {
+            time: '2018-12-13',
+            open: 57.00,
+            high: 57.50,
+            low: 56.81,
+            close: 57.09
+        },
+        {
+            time: '2018-12-14',
+            open: 56.95,
+            high: 57.50,
+            low: 56.75,
+            close: 57.08
+        },
+        {
+            time: '2018-12-17',
+            open: 57.06,
+            high: 57.31,
+            low: 55.53,
+            close: 55.95
+        },
+        {
+            time: '2018-12-18',
+            open: 55.94,
+            high: 56.69,
+            low: 55.31,
+            close: 55.65
+        },
+        {
+            time: '2018-12-19',
+            open: 55.72,
+            high: 56.92,
+            low: 55.50,
+            close: 55.86
+        },
+        {
+            time: '2018-12-20',
+            open: 55.92,
+            high: 56.01,
+            low: 54.26,
+            close: 55.07
+        },
+        {
+            time: '2018-12-21',
+            open: 54.84,
+            high: 56.53,
+            low: 54.24,
+            close: 54.92
+        },
+        {
+            time: '2018-12-24',
+            open: 54.68,
+            high: 55.04,
+            low: 52.94,
+            close: 53.05
+        },
+        {
+            time: '2018-12-26',
+            open: 53.23,
+            high: 54.47,
+            low: 52.40,
+            close: 54.44
+        },
+        {
+            time: '2018-12-27',
+            open: 54.31,
+            high: 55.17,
+            low: 53.35,
+            close: 55.15
+        },
+        {
+            time: '2018-12-28',
+            open: 55.37,
+            high: 55.86,
+            low: 54.90,
+            close: 55.27
+        },
+        {
+            time: '2018-12-31',
+            open: 55.53,
+            high: 56.23,
+            low: 55.07,
+            close: 56.22
+        },
+        {
+            time: '2019-01-02',
+            open: 56.16,
+            high: 56.16,
+            low: 55.28,
+            close: 56.02
+        },
+        {
+            time: '2019-01-03',
+            open: 56.30,
+            high: 56.99,
+            low: 56.06,
+            close: 56.22
+        },
+        {
+            time: '2019-01-04',
+            open: 56.49,
+            high: 56.89,
+            low: 55.95,
+            close: 56.36
+        },
+        {
+            time: '2019-01-07',
+            open: 56.76,
+            high: 57.26,
+            low: 56.55,
+            close: 56.72
+        },
+        {
+            time: '2019-01-08',
+            open: 57.27,
+            high: 58.69,
+            low: 57.05,
+            close: 58.38
+        },
+        {
+            time: '2019-01-09',
+            open: 57.68,
+            high: 57.72,
+            low: 56.85,
+            close: 57.05
+        },
+        {
+            time: '2019-01-10',
+            open: 57.29,
+            high: 57.70,
+            low: 56.87,
+            close: 57.60
+        },
+        {
+            time: '2019-01-11',
+            open: 57.84,
+            high: 58.26,
+            low: 57.42,
+            close: 58.02
+        },
+        {
+            time: '2019-01-14',
+            open: 57.83,
+            high: 58.15,
+            low: 57.67,
+            close: 58.03
+        },
+        {
+            time: '2019-01-15',
+            open: 57.74,
+            high: 58.29,
+            low: 57.58,
+            close: 58.10
+        },
+        {
+            time: '2019-01-16',
+            open: 57.93,
+            high: 57.93,
+            low: 57.00,
+            close: 57.08
+        },
+        {
+            time: '2019-01-17',
+            open: 57.16,
+            high: 57.40,
+            low: 56.21,
+            close: 56.83
+        },
+        {
+            time: '2019-01-18',
+            open: 56.92,
+            high: 57.47,
+            low: 56.84,
+            close: 57.09
+        },
+        {
+            time: '2019-01-22',
+            open: 57.23,
+            high: 57.39,
+            low: 56.40,
+            close: 56.99
+        },
+        {
+            time: '2019-01-23',
+            open: 56.98,
+            high: 57.87,
+            low: 56.93,
+            close: 57.76
+        },
+        {
+            time: '2019-01-24',
+            open: 57.61,
+            high: 57.65,
+            low: 56.50,
+            close: 57.07
+        },
+        {
+            time: '2019-01-25',
+            open: 57.18,
+            high: 57.47,
+            low: 56.23,
+            close: 56.40
+        },
+        {
+            time: '2019-01-28',
+            open: 56.12,
+            high: 56.22,
+            low: 54.80,
+            close: 55.07
+        },
+        {
+            time: '2019-01-29',
+            open: 53.62,
+            high: 54.30,
+            low: 52.97,
+            close: 53.28
+        },
+        {
+            time: '2019-01-30',
+            open: 53.10,
+            high: 54.02,
+            low: 52.28,
+            close: 54.00
+        },
+        {
+            time: '2019-01-31',
+            open: 54.05,
+            high: 55.19,
+            low: 53.53,
+            close: 55.06
+        },
+        {
+            time: '2019-02-01',
+            open: 55.21,
+            high: 55.30,
+            low: 54.47,
+            close: 54.55
+        },
+        {
+            time: '2019-02-04',
+            open: 54.60,
+            high: 54.69,
+            low: 53.67,
+            close: 54.04
+        },
+        {
+            time: '2019-02-05',
+            open: 54.10,
+            high: 54.34,
+            low: 53.61,
+            close: 54.14
+        },
+        {
+            time: '2019-02-06',
+            open: 54.11,
+            high: 54.37,
+            low: 53.68,
+            close: 53.79
+        },
+        {
+            time: '2019-02-07',
+            open: 53.61,
+            high: 53.73,
+            low: 53.02,
+            close: 53.57
+        },
+        {
+            time: '2019-02-08',
+            open: 53.36,
+            high: 53.96,
+            low: 53.30,
+            close: 53.95
+        },
+        {
+            time: '2019-02-11',
+            open: 54.13,
+            high: 54.37,
+            low: 53.86,
+            close: 54.05
+        },
+        {
+            time: '2019-02-12',
+            open: 54.45,
+            high: 54.77,
+            low: 54.19,
+            close: 54.42
+        },
+        {
+            time: '2019-02-13',
+            open: 54.35,
+            high: 54.77,
+            low: 54.28,
+            close: 54.48
+        },
+        {
+            time: '2019-02-14',
+            open: 54.38,
+            high: 54.52,
+            low: 53.95,
+            close: 54.03
+        },
+        {
+            time: '2019-02-15',
+            open: 54.48,
+            high: 55.19,
+            low: 54.32,
+            close: 55.16
+        },
+        {
+            time: '2019-02-19',
+            open: 55.06,
+            high: 55.66,
+            low: 54.82,
+            close: 55.44
+        },
+        {
+            time: '2019-02-20',
+            open: 55.37,
+            high: 55.91,
+            low: 55.24,
+            close: 55.76
+        },
+        {
+            time: '2019-02-21',
+            open: 55.55,
+            high: 56.72,
+            low: 55.46,
+            close: 56.15
+        },
+        {
+            time: '2019-02-22',
+            open: 56.43,
+            high: 57.13,
+            low: 56.40,
+            close: 56.92
+        },
+        {
+            time: '2019-02-25',
+            open: 57.00,
+            high: 57.27,
+            low: 56.55,
+            close: 56.78
+        },
+        {
+            time: '2019-02-26',
+            open: 56.82,
+            high: 57.09,
+            low: 56.46,
+            close: 56.64
+        },
+        {
+            time: '2019-02-27',
+            open: 56.55,
+            high: 56.73,
+            low: 56.35,
+            close: 56.72
+        },
+        {
+            time: '2019-02-28',
+            open: 56.74,
+            high: 57.61,
+            low: 56.72,
+            close: 56.92
+        },
+        {
+            time: '2019-03-01',
+            open: 57.02,
+            high: 57.15,
+            low: 56.35,
+            close: 56.96
+        },
+        {
+            time: '2019-03-04',
+            open: 57.15,
+            high: 57.34,
+            low: 55.66,
+            close: 56.24
+        },
+        {
+            time: '2019-03-05',
+            open: 56.09,
+            high: 56.17,
+            low: 55.51,
+            close: 56.08
+        },
+        {
+            time: '2019-03-06',
+            open: 56.19,
+            high: 56.42,
+            low: 55.45,
+            close: 55.68
+        },
+        {
+            time: '2019-03-07',
+            open: 55.76,
+            high: 56.40,
+            low: 55.72,
+            close: 56.30
+        },
+        {
+            time: '2019-03-08',
+            open: 56.36,
+            high: 56.68,
+            low: 56.00,
+            close: 56.53
+        },
+        {
+            time: '2019-03-11',
+            open: 56.76,
+            high: 57.62,
+            low: 56.75,
+            close: 57.58
+        },
+        {
+            time: '2019-03-12',
+            open: 57.63,
+            high: 58.11,
+            low: 57.36,
+            close: 57.43
+        },
+        {
+            time: '2019-03-13',
+            open: 57.37,
+            high: 57.74,
+            low: 57.34,
+            close: 57.66
+        },
+        {
+            time: '2019-03-14',
+            open: 57.71,
+            high: 58.09,
+            low: 57.51,
+            close: 57.95
+        },
+        {
+            time: '2019-03-15',
+            open: 58.04,
+            high: 58.51,
+            low: 57.93,
+            close: 58.39
+        },
+        {
+            time: '2019-03-18',
+            open: 58.27,
+            high: 58.32,
+            low: 57.56,
+            close: 58.07
+        },
+        {
+            time: '2019-03-19',
+            open: 58.10,
+            high: 58.20,
+            low: 57.31,
+            close: 57.50
+        },
+        {
+            time: '2019-03-20',
+            open: 57.51,
+            high: 58.05,
+            low: 57.11,
+            close: 57.67
+        },
+        {
+            time: '2019-03-21',
+            open: 57.58,
+            high: 58.49,
+            low: 57.57,
+            close: 58.29
+        },
+        {
+            time: '2019-03-22',
+            open: 58.16,
+            high: 60.00,
+            low: 58.13,
+            close: 59.76
+        },
+        {
+            time: '2019-03-25',
+            open: 59.63,
+            high: 60.19,
+            low: 59.53,
+            close: 60.08
+        },
+        {
+            time: '2019-03-26',
+            open: 60.30,
+            high: 60.69,
+            low: 60.17,
+            close: 60.63
+        },
+        {
+            time: '2019-03-27',
+            open: 60.56,
+            high: 61.19,
+            low: 60.48,
+            close: 60.88
+        },
+        {
+            time: '2019-03-28',
+            open: 60.88,
+            high: 60.89,
+            low: 58.44,
+            close: 59.08
+        },
+        {
+            time: '2019-03-29',
+            open: 59.20,
+            high: 59.27,
+            low: 58.32,
+            close: 59.13
+        },
+        {
+            time: '2019-04-01',
+            open: 59.39,
+            high: 59.41,
+            low: 58.79,
+            close: 59.09
+        },
+        {
+            time: '2019-04-02',
+            open: 59.22,
+            high: 59.23,
+            low: 58.34,
+            close: 58.53
+        },
+        {
+            time: '2019-04-03',
+            open: 58.78,
+            high: 59.07,
+            low: 58.41,
+            close: 58.87
+        },
+        {
+            time: '2019-04-04',
+            open: 58.84,
+            high: 59.10,
+            low: 58.77,
+            close: 58.99
+        },
+        {
+            time: '2019-04-05',
+            open: 59.02,
+            high: 59.09,
+            low: 58.82,
+            close: 59.09
+        },
+        {
+            time: '2019-04-08',
+            open: 59.02,
+            high: 59.13,
+            low: 58.72,
+            close: 59.13
+        },
+        {
+            time: '2019-04-09',
+            open: 58.37,
+            high: 58.56,
+            low: 58.04,
+            close: 58.40
+        },
+        {
+            time: '2019-04-10',
+            open: 58.40,
+            high: 58.70,
+            low: 58.36,
+            close: 58.61
+        },
+        {
+            time: '2019-04-11',
+            open: 58.65,
+            high: 58.73,
+            low: 58.20,
+            close: 58.56
+        },
+        {
+            time: '2019-04-12',
+            open: 58.75,
+            high: 58.79,
+            low: 58.52,
+            close: 58.74
+        },
+        {
+            time: '2019-04-15',
+            open: 58.91,
+            high: 58.95,
+            low: 58.59,
+            close: 58.71
+        },
+        {
+            time: '2019-04-16',
+            open: 58.79,
+            high: 58.98,
+            low: 58.66,
+            close: 58.79
+        },
+        {
+            time: '2019-04-17',
+            open: 58.40,
+            high: 58.46,
+            low: 57.64,
+            close: 57.78
+        },
+        {
+            time: '2019-04-18',
+            open: 57.51,
+            high: 58.20,
+            low: 57.28,
+            close: 58.04
+        },
+        {
+            time: '2019-04-22',
+            open: 58.14,
+            high: 58.49,
+            low: 57.89,
+            close: 58.37
+        },
+        {
+            time: '2019-04-23',
+            open: 57.62,
+            high: 57.72,
+            low: 56.30,
+            close: 57.15
+        },
+        {
+            time: '2019-04-24',
+            open: 57.34,
+            high: 57.57,
+            low: 56.73,
+            close: 57.08
+        },
+        {
+            time: '2019-04-25',
+            open: 56.82,
+            high: 56.90,
+            low: 55.75,
+            close: 55.85
+        },
+        {
+            time: '2019-04-26',
+            open: 56.06,
+            high: 56.81,
+            low: 55.83,
+            close: 56.58
+        },
+        {
+            time: '2019-04-29',
+            open: 56.75,
+            high: 57.17,
+            low: 56.71,
+            close: 56.84
+        },
+        {
+            time: '2019-04-30',
+            open: 56.99,
+            high: 57.45,
+            low: 56.76,
+            close: 57.19
+        },
+        {
+            time: '2019-05-01',
+            open: 57.23,
+            high: 57.30,
+            low: 56.52,
+            close: 56.52
+        },
+        {
+            time: '2019-05-02',
+            open: 56.81,
+            high: 58.23,
+            low: 56.68,
+            close: 56.99
+        },
+        {
+            time: '2019-05-03',
+            open: 57.15,
+            high: 57.36,
+            low: 56.87,
+            close: 57.24
+        },
+        {
+            time: '2019-05-06',
+            open: 56.83,
+            high: 57.09,
+            low: 56.74,
+            close: 56.91
+        },
+        {
+            time: '2019-05-07',
+            open: 56.69,
+            high: 56.81,
+            low: 56.33,
+            close: 56.63
+        },
+        {
+            time: '2019-05-08',
+            open: 56.66,
+            high: 56.70,
+            low: 56.25,
+            close: 56.38
+        },
+        {
+            time: '2019-05-09',
+            open: 56.12,
+            high: 56.56,
+            low: 55.93,
+            close: 56.48
+        },
+        {
+            time: '2019-05-10',
+            open: 56.49,
+            high: 57.04,
+            low: 56.26,
+            close: 56.91
+        },
+        {
+            time: '2019-05-13',
+            open: 56.72,
+            high: 57.34,
+            low: 56.66,
+            close: 56.75
+        },
+        {
+            time: '2019-05-14',
+            open: 56.76,
+            high: 57.19,
+            low: 56.50,
+            close: 56.55
+        },
+        {
+            time: '2019-05-15',
+            open: 56.51,
+            high: 56.84,
+            low: 56.17,
+            close: 56.81
+        },
+        {
+            time: '2019-05-16',
+            open: 57.00,
+            high: 57.80,
+            low: 56.82,
+            close: 57.38
+        },
+        {
+            time: '2019-05-17',
+            open: 57.06,
+            high: 58.48,
+            low: 57.01,
+            close: 58.09
+        },
+        {
+            time: '2019-05-20',
+            open: 59.15,
+            high: 60.54,
+            low: 58.00,
+            close: 59.01
+        },
+        {
+            time: '2019-05-21',
+            open: 59.10,
+            high: 59.63,
+            low: 58.76,
+            close: 59.50
+        },
+        {
+            time: '2019-05-22',
+            open: 59.09,
+            high: 59.37,
+            low: 58.96,
+            close: 59.25
+        },
+        {
+            time: '2019-05-23',
+            open: 59.00,
+            high: 59.27,
+            low: 58.54,
+            close: 58.87
+        },
+        {
+            time: '2019-05-24',
+            open: 59.07,
+            high: 59.36,
+            low: 58.67,
+            close: 59.32
+        },
+        {
+            time: '2019-05-28',
+            open: 59.21,
+            high: 59.66,
+            low: 59.02,
+            close: 59.57
+        },
+    ];
+
+    candleSeries.setData(data);
+
+    var lastClose = data[data.length - 1].close;
+    var lastIndex = data.length - 1;
+
+    var targetIndex = lastIndex + 105 + Math.round(Math.random() + 30);
+    var targetPrice = getRandomPrice();
+
+    var currentIndex = lastIndex + 1;
+    var currentBusinessDay = {
+        day: 29,
+        month: 5,
+        year: 2019
+    };
+    var ticksInCurrentBar = 0;
+    var currentBar = {
+        open: null,
+        high: null,
+        low: null,
+        close: null,
+        time: currentBusinessDay,
+    };
+
+    function mergeTickToBar(price) {
+        if (currentBar.open === null) {
+            currentBar.open = price;
+            currentBar.high = price;
+            currentBar.low = price;
+            currentBar.close = price;
+        } else {
+            currentBar.close = price;
+            currentBar.high = Math.max(currentBar.high, price);
+            currentBar.low = Math.min(currentBar.low, price);
+        }
+        candleSeries.update(currentBar);
+    }
+
+    function reset() {
+        candleSeries.setData(data);
+        lastClose = data[data.length - 1].close;
+        lastIndex = data.length - 1;
+
+        targetIndex = lastIndex + 5 + Math.round(Math.random() + 30);
+        targetPrice = getRandomPrice();
+
+        currentIndex = lastIndex + 1;
+        currentBusinessDay = {
+            day: 29,
+            month: 5,
+            year: 2019
+        };
+        ticksInCurrentBar = 0;
+    }
+
+    function getRandomPrice() {
+        return 10 + Math.round(Math.random() * 10000) / 100;
+    }
+
+    function nextBusinessDay(time) {
+        var d = new Date();
+        d.setUTCFullYear(time.year);
+        d.setUTCMonth(time.month - 1);
+        d.setUTCDate(time.day + 1);
+        d.setUTCHours(0, 0, 0, 0);
+        return {
+            year: d.getUTCFullYear(),
+            month: d.getUTCMonth() + 1,
+            day: d.getUTCDate(),
+        };
+    }
+
+    setInterval(function() {
+        var deltaY = targetPrice - lastClose;
+        var deltaX = targetIndex - lastIndex;
+        var angle = deltaY / deltaX;
+        var basePrice = lastClose + (currentIndex - lastIndex) * angle;
+        var noise = (0.1 - Math.random() * 0.2) + 1.0;
+        var noisedPrice = basePrice * noise;
+        mergeTickToBar(noisedPrice);
+        if (++ticksInCurrentBar === 5) {
+            // move to next bar
+            currentIndex++;
+            currentBusinessDay = nextBusinessDay(currentBusinessDay);
+            currentBar = {
+                open: null,
+                high: null,
+                low: null,
+                close: null,
+                time: currentBusinessDay,
+            };
+            ticksInCurrentBar = 0;
+            if (currentIndex === 5000) {
+                reset();
+                return;
+            }
+            if (currentIndex === targetIndex) {
+                // change trend
+                lastClose = noisedPrice;
+                lastIndex = currentIndex;
+                targetIndex = lastIndex + 5 + Math.round(Math.random() + 30);
+                targetPrice = getRandomPrice();
+            }
+        }
+    }, 25000);
+</script>
 
 </html>

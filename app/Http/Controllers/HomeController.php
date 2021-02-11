@@ -54,16 +54,19 @@ class HomeController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function store(Request $request, User $user)
+    public function invest(Request $request, User $user)
     {
-        $user->coins = $user->coins - $request->coins;
+        $user_data = $request->validate([
+            'coins' => ''
+        ]);
+        $coins = $user->coins - $request->amount;
+        $coins_array = ['coins' => $coins];
+        
+        auth()->user()->update(array_merge(
+            $user_data,
+            $coins_array ?? []
+        ));
 
-        if ($user->save()) {
-            $request->session()->flash('success', $user->name . ' has added coins');
-        } else {
-            $request->session()->flash('error', 'There was an error updating the user');
-        }
-
-        return redirect()->route('users.index');
+        return redirect()->back()->with(['status' => 'Invested successfully.']);
     }
 }
