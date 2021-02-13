@@ -26,80 +26,11 @@
         <iframe src="//www.googletagmanager.com/ns.html?id=GTM-54TR9PV" height="0" width="0" style="display: none; visibility: hidden"></iframe>
     </noscript>
 
-    <header id="layout-header" class="group">
-        <div id="header">
-            <div class="header-zone-top">
-                <div class="content scrollable">
-                    <div class="container clearfix">
-                        <div class="zone zone-header">
-                            <div class="login last-child">
-                                <span class="status-bar-user hidden-logged-in last-child">
-                                    <span class="status-bar-greetings first-child last-child">
-                                        <a href="/GoToExternalLink?place=/account" class="btn btn-red btn-sm last-child">
-                                            <span class="hidden-xs first-child">CLAIM YOUR $50 CASHBACK!</span>
-                                        </a>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="zone zone-navigation">
-            <article class="widget-navigation widget-html-widget widget">
-                <div>
-                    <nav class="navbar navbar-default" role="navigation" id="common-nav">
-                        <div class="content">
-                            <div class="d-flex justify-content-around">
-                                <!-- Brand and toggle get grouped for better mobile display -->
-                                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                                    <a href="/" class="high-low demo pull-left icon">
-                                        <img src="images/highlow-logo.svg" />
-                                    </a>
-                                </div>
-                                <!-- Collect the nav links, forms, and other content for toggling -->
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav navbar-right" style="display:block">
-                                        @can('admin-user')
-                                        <li><a href="/users">Users List</a></li>
-                                        @endcan
-                                        <li class="dropdown trade-menu-toggle-bookmark toggler active" data-hover-toggle="true" data-hover-outside-target=".trade-menu-toggle-bookmark" data-toggle-class="open" data-toggle-target=".trade-menu-toggle-bookmark" data-toggle-group="main-menu"><a href="//en.demotrade.highlow.net" class="dropdown-toggle"><i class="iWrapper" style="display: inline-block;">TRADE</i><span class="icon-wrapper"><span class="icon drop-down"></span><span class="icon drop-down-yellow"></span></span></a></li>
-                                        <li class="dropdown highlow-menu-toggle-bookmark toggler" data-hover-toggle="true" data-hover-outside-target=".highlow-menu-toggle-bookmark" data-toggle-class="open" data-toggle-target=".highlow-menu-toggle-bookmark" data-toggle-group="main-menu"><a href="/GoToExternalLink?place=/overview" class="dropdown-toggle"><i class="iWrapper" style="display: inline-block;">HIGHLOW</i><span class="icon-wrapper"><span class="icon drop-down"></span><span class="icon drop-down-yellow"></span></span></a></li>
-                                        <li class="dropdown resources-menu-toggle-bookmark toggler" data-hover-toggle="true" data-hover-outside-target=".resources-menu-toggle-bookmark" data-toggle-class="open" data-toggle-target=".resources-menu-toggle-bookmark" data-toggle-group="main-menu"><a href="/GoToExternalLink?place=/resources/overview" class="dropdown-toggle"><i class="iWrapper" style="display: inline-block;">RESOURCES</i><span class="icon-wrapper"><span class="icon drop-down"></span><span class="icon drop-down-yellow"></span></span></a></li>
-                                        @guest
-                                        @if (Route::has('login'))
-                                        <li class="sign-up-menu last-child loggedin-hidden quick-demo-visible"><a href="{{ route('login') }}"><i class="iWrapper" style="display: inline-block;">SIGN IN</i></a></li>
-                                        @endif
-                                        @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </li>
-                                        @endguest
-                                    </ul>
-                                </div>
-                                <!-- /.navbar-collapse -->
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                    </nav>
-                </div>
-            </article>
-        </div>
-    </header>
+    <div id="layout-header" class="group">
+        <header id="header">
+            @include('layouts.header')
+        </header>
+    </div>
 
     <div id="layout-before-main" class="group sticky-strip trows">
         <div class="content">
@@ -111,7 +42,8 @@
                                 <div id="account-balance" class="">
                                     <div class="pull-right account-balance pt-4">
                                         <h4 class="first-child">Account Balance</h4>
-                                        <span id="balance" class="balance-display balanceValue balanceArea last-child">@cannot('admin-user')
+                                        <span id="balance" class="balance-display balanceValue balanceArea last-child">
+                                            @cannot('admin-user')
                                             <div class="content">
                                                 <div class="d-flex justify-content-end text-white">
                                                     {{ Auth::user()->coins ?? '0.00'}}
@@ -134,29 +66,26 @@
             <div id="layout-content" class="group">
                 <div id="content" class="group">
                     <div class="zone zone-content">
-
                         <div id="tradingContent" class="trading-app-root main-view">
                             <div class="game-options">
                                 <div class="container">
                                     <section id="gameTypeRegion">
-                                        <div>
-                                            <div class="gameTabArea" id="gameTabArea">
-                                                <div id="assetsGameTypeZoneRegion">
-                                                    <ul>
-                                                        <li class="gameTab selected" data-game="ChangingStrike">
-                                                            <span id="ChangingStrike">HighLow</span><span class="closed hiddenArea">Closed</span>
-                                                        </li>
-                                                        <li class="gameTab" data-game="ChangingStrikeOOD">
-                                                            <span id="ChangingStrikeOOD">HighLow Spread</span><span class="closed hiddenArea">Closed</span>
-                                                        </li>
-                                                        <li class="gameTab selected" data-game="ChangingStrike">
-                                                            <span id="ChangingStrike">Turbo</span><span class="closed hiddenArea">Closed</span>
-                                                        </li>
-                                                        <li class="gameTab" data-game="ChangingStrikeOOD">
-                                                            <span id="ChangingStrikeOOD">Turbo Spread</span><span class="closed hiddenArea">Closed</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                        <div class="gameTabArea" id="gameTabArea">
+                                            <div id="assetsGameTypeZoneRegion">
+                                                <ul>
+                                                    <li class="gameTab selected" data-game="ChangingStrike">
+                                                        <span id="ChangingStrike">HighLow</span><span class="closed hiddenArea">Closed</span>
+                                                    </li>
+                                                    <li class="gameTab" data-game="ChangingStrikeOOD">
+                                                        <span id="ChangingStrikeOOD">HighLow Spread</span><span class="closed hiddenArea">Closed</span>
+                                                    </li>
+                                                    <li class="gameTab selected" data-game="ChangingStrike">
+                                                        <span id="ChangingStrike">Turbo</span><span class="closed hiddenArea">Closed</span>
+                                                    </li>
+                                                    <li class="gameTab" data-game="ChangingStrikeOOD">
+                                                        <span id="ChangingStrikeOOD">Turbo Spread</span><span class="closed hiddenArea">Closed</span>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </section>
@@ -199,7 +128,7 @@
                                                                         <div id="categoryListRegion">
                                                                             <div>
                                                                                 <span id="filterTitle">Filter Assets</span>
-                                                                                <div id="categoryContainer">
+                                                                                <!-- <div id="categoryContainer">
                                                                                     <div id="categoriesList">
                                                                                         <div class="category_item active preview">
 
@@ -227,7 +156,7 @@
                                                                                             <span class="categoryCount">(10)</span>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </div>
                                                                         <div id="stocksCategoryListRegion"></div>
@@ -253,7 +182,7 @@
                                                                             <div>
                                                                                 <div id="currentCategoryLabel">All Assets</div>
                                                                                 <div id="currentSubcategoryLabel" class="active">View all Assets</div>
-                                                                                <div id="assetsContainer" class="mCustomScrollbar _mCS_1">
+                                                                                <!-- <div id="assetsContainer" class="mCustomScrollbar _mCS_1">
                                                                                     <div id="mCSB_1" class="mCustomScrollBox mCS-inset-dark mCSB_vertical mCSB_inside" tabindex="0">
                                                                                         <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0px; left:0;" dir="ltr">
                                                                                             <div id="assetsList">
@@ -370,7 +299,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -721,42 +650,47 @@
                                                             </div>
                                                             <div class="chart-header-info panel-header">
                                                                 <div id="strikeAreaRegion">
-                                                                    <div>
-                                                                        <div id="strikeArea" class="strikeArea pull-left first-child">
-
-                                                                            <span id="asset" class="trading-platform-instrument-title font-sb eng first-child">USD/JPY</span>
-                                                                            <span id="direction" class="strike-direction trading-platform-instrument-direction up"></span>
-                                                                            <span id="strike" class="trading-platform-instrument-rate eng current-rate">104.848</span>
-                                                                            <span id="pipRange" class="trading-platform-instrument-spread-range last-child eng"></span>
-                                                                            <span id="tradingClosed" class="trading-platform-instrument-trading-is-closed hiddenArea">Trading is closed</span>
-                                                                            <span id="openingTime" class="trading-platform-instrument-open-time last-child hiddenArea" style="display: none;"></span>
-                                                                            <span class="loading-icon hiddenArea"></span>
-
-                                                                        </div>
-                                                                        <div class="chartTimeArea pull-right last-child">
-
-                                                                            <div id="closingTime" class="closingTime trading-platform-instrument-closing-time eng first-child">13:00</div>
-                                                                            <div id="timeRemaining" class="timeRemaining trading-platform-instrument-time-left eng">
-                                                                                <span id="time">15:00</span>
-                                                                            </div>
-
-                                                                            <a class="trading-platform-instrument-one-click-toggler tooltip-container last-child">
-                                                                                <div class="tooltip one-touch first-child last-child hiddenArea" style="display: none; opacity: 0;">
-                                                                                    <div class="title first-child">
-                                                                                        One Click Trading
-                                                                                    </div>
-                                                                                    <div class="content last-child">
-                                                                                        <p class="first-child">Switch to One Click Trading for faster trade execution. </p>
-                                                                                        <p class="last-child">Note: When switched on, One Click Trading will be active on both the chart and trade panel.</p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </a>
-
-                                                                        </div>
-                                                                        <div class="clearfix">
-
-                                                                        </div>
+                                                                    <div id="strikeArea" class="strikeArea pull-left first-child">
+                                                                        <span id="asset" class="trading-platform-instrument-title font-sb eng first-child">USD/JPY</span>
+                                                                        <span id="direction" class="strike-direction trading-platform-instrument-direction up"></span>
+                                                                        <span id="strike" class="trading-platform-instrument-rate eng current-rate">104.848</span>
+                                                                        <span id="pipRange" class="trading-platform-instrument-spread-range last-child eng"></span>
+                                                                        <span id="tradingClosed" class="trading-platform-instrument-trading-is-closed">Trading is closed</span>
+                                                                        <span id="openingTime" class="trading-platform-instrument-open-time last-child hiddenArea" style="display: none;"></span>
+                                                                        <span class="loading-icon hiddenArea"></span>
                                                                     </div>
+
+                                                                    <div class="chartTimeArea pull-right last-child">
+                                                                        <!-- <div id="statusMessage" class="statusmessage eng first-child">status messages</div> -->
+                                                                        <div id="closingTime" class="closingTime trading-platform-instrument-closing-time eng">13:00</div>
+                                                                        <div id="timeRemaining" class="timeRemaining trading-platform-instrument-time-left eng">
+                                                                            <span id="time">15:00</span>
+                                                                        </div>
+
+                                                                        <a class="trading-platform-instrument-one-click-toggler tooltip-container last-child">
+                                                                            <div class="tooltip one-touch first-child last-child hiddenArea" style="display: none; opacity: 0;">
+                                                                                <div class="title first-child">
+                                                                                    One Click Trading
+                                                                                </div>
+                                                                                <div class="content last-child">
+                                                                                    <p class="first-child">Switch to One Click Trading for faster trade execution. </p>
+                                                                                    <p class="last-child">Note: When switched on, One Click Trading will be active on both the chart and trade panel.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+
+                                                                    </div>
+                                                                    <div class="clearfix pull-right pr-3">
+                                                                        @if ($errors->any())
+                                                                        <ul>
+                                                                            @foreach($errors->all() as $error)
+                                                                            <li>{{$error}}</li>
+                                                                            @endforeach
+                                                                        </ul>
+
+                                                                        @endif
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                             <div class="clear"></div>
@@ -841,12 +775,12 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <form action="{{route('invest.store')}}" method="POST" enctype="multipart/form-data">                                                                        
+                                                                                <form action="{{route('invest.store')}}" method="POST" enctype="multipart/form-data">
                                                                                     {{ csrf_field() }}
                                                                                     <div class="sums">
                                                                                         <div class="amountBox trading-platform-main-controls-investment font-m">
                                                                                             <span>$</span>
-                                                                                            <input type="text" maxlength="10" name="amount" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
+                                                                                            <input type="text" maxlength="10" name="amount" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child" required>
                                                                                         </div>
                                                                                         <div class="amount-area trading-platform-main-controls-common-amount">
                                                                                             <div class="defaultAmount" val="50" onclick="myFunction50()">$50</div>
@@ -856,66 +790,57 @@
                                                                                             <div class="defaultAmount" val="500" onclick="myFunction500()">$500</div>
                                                                                         </div>
                                                                                         <script>
-                                                                                            //$(document).ready(function() {
-                                                                                                function myFunction50() {
-                                                                                                    document.getElementById("amount").value = "50";
-                                                                                                }
+                                                                                            function myFunction50() {
+                                                                                                document.getElementById("amount").value = "50";
+                                                                                            }
 
-                                                                                                function myFunction100() {
-                                                                                                    document.getElementById("amount").value = "100";
-                                                                                                }
+                                                                                            function myFunction100() {
+                                                                                                document.getElementById("amount").value = "100";
+                                                                                            }
 
-                                                                                                function myFunction500() {
-                                                                                                    document.getElementById("amount").value = "500";
-                                                                                                }
+                                                                                            function myFunction500() {
+                                                                                                document.getElementById("amount").value = "500";
+                                                                                            }
 
-                                                                                                function startTimer(duration, display) {
-                                                                                                    var timer = duration,
-                                                                                                        minutes, seconds;
-                                                                                                    setInterval(function() {
-                                                                                                        minutes = parseInt(timer / 60, 10);
-                                                                                                        seconds = parseInt(timer % 60, 10);
+                                                                                            function startTimer(duration, display) {
+                                                                                                var timer = duration,
+                                                                                                    minutes, seconds;
+                                                                                                setInterval(function() {
+                                                                                                    minutes = parseInt(timer / 60, 10);
+                                                                                                    seconds = parseInt(timer % 60, 10);
 
-                                                                                                        minutes = minutes < 10 ? "0" + minutes : minutes;
-                                                                                                        seconds = seconds < 10 ? "0" + seconds : seconds;
+                                                                                                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                                                                                                    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                                                                                                        display.textContent = minutes + ":" + seconds;
+                                                                                                    display.textContent = minutes + ":" + seconds;
 
-                                                                                                        if (--timer < 0) {
-                                                                                                            timer = duration;
-                                                                                                        }
-                                                                                                    }, 1000);
-                                                                                                }
-
-                                                                                                window.onload = function() {
-                                                                                                    var fifteenMinutes = 60 * 15,
-                                                                                                        display = document.querySelector('#time');
-                                                                                                    startTimer(fifteenMinutes, display);
-                                                                                                };
-
-                                                                                                $('#bid_state_button').on('click', function() {
-                                                                                                    if ($('div[name=up_button]').click) {
-                                                                                                        document.getElementById("bid_state_button").value = 'H';
-                                                                                                    } else {
-                                                                                                        document.getElementById("bid_state_button").value = 'L';
+                                                                                                    if (--timer < 0) {
+                                                                                                        timer = duration;
                                                                                                     }
-                                                                                                })
-                                                                                            //})
+                                                                                                }, 1000);
+                                                                                            }
+
+                                                                                            window.onload = function() {
+                                                                                                var fifteenMinutes = 60 * 15,
+                                                                                                    display = document.querySelector('#time');
+                                                                                                startTimer(fifteenMinutes, display);
+                                                                                            };
                                                                                         </script>
                                                                                     </div>
                                                                                     <div class="invest-area clearfix trading-platform-main-controls-options none-one-click-control">
                                                                                         <div class="trading-platform-main-controls-select-direction first-child">
                                                                                             <div class="subGraph-updown">
-                                                                                                <div class="subGraph-up">
-                                                                                                    <div class="up button" id="bid_state_button" name="up_button" onclick="upButton()">High</div>
-                                                                                                </div>
-                                                                                                <div class="subGraph-down">
-                                                                                                    <div class="dwn button" id="bid_state_button" name="down_button">Low</div>
-                                                                                                </div>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="state_button" value="H" style="display: block;" required>
+                                                                                                    <label type="button" class="up button" id="up_button">High</label>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="state_button" value="L" style="display: block;">
+                                                                                                    <button type="button" class="dwn button" id="down_button">Low</button>
+                                                                                                </label>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="invest-btn trading-platform-main-controls-place-bet last-child">
-
                                                                                             <button type="submit" class="invest investNow_disabled button" id="invest_now_button" style="display: block;">Invest</button>
                                                                                         </div>
                                                                                     </div>
@@ -971,51 +896,6 @@
                                 </section>
                             </div>
 
-                            <div class="container trading-app-holiday">
-                                <section id="holidayRegion">
-                                    <script type="text/html" id="template-holidayContainerView">
-                                        <section class="holidayArea">
-                                            <div class="holiday-header">
-                                                <span id="tradingClosed" class="trading-platform-instrument-trading-is-closed">Trading is closed</span>
-                                                <span id="openingTime" class="trading-platform-instrument-open-time last-child">Market will reopen at <span class="open-future-time">00:00</span></span>
-                                            </div>
-                                            <div class="holiday-body">
-                                                <div class="chartArea">
-                                                    <div id="chartContainer" class="chartContainer trading-platform-live-graph collapsed future"></div>
-                                                    <section id="tradingZoneRegion" class="trading-platform-main-controls last-child">
-                                                        <div>
-                                                            <div id="trading_zone" class="subGraph ChangingStrike">
-                                                                <div id="trading_zone_content">
-                                                                    <div class="trading-platform-disabled-mode trading-ticket-view hiddenArea future">
-                                                                        <div class="trading-platform-disabled-title">Trading is closed</div>
-                                                                        <div class="trading-platform-disabled-timer-countdown">
-                                                                            <div class="title">Market reopens in</div>
-                                                                            <div class="timer">
-                                                                                <div class="cell days">00</div>
-                                                                                <div class="cell hours">00</div>
-                                                                                <div class="cell minutes">00</div>
-                                                                                <div class="cell seconds">00</div>
-                                                                            </div>
-                                                                            <div class="timer-hints">
-                                                                                <div class="cell days">DAYS</div>
-                                                                                <div class="cell hours">HRS</div>
-                                                                                <div class="cell minutes">MINS</div>
-                                                                                <div class="cell seconds">SECS</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </section>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </script>
-                                </section>
-                            </div>
-
                             <div class="container trading-app-tradeactions">
                                 <section id="tradeActionsRegion">
                                     <div id="trade_actions_container" class="trade_actions_container">
@@ -1035,6 +915,8 @@
                                         <div class="tradeActionsTableArea panel-body last-child">
                                             <div class="trading-platform-investments-list-no-data first-child">
                                                 You have no active trades
+                                                <div id="example"></div>
+                                                <script src="/js/app.js"></script>
                                             </div>
                                             <div id="tradeActionsTableArea" class=""></div>
                                         </div>
@@ -1048,55 +930,13 @@
         </div>
     </div>
 
-    <div id="layout-after-main" class="group">
-    </div>
-
     <div id="layout-footer" class="group">
         <footer id="footer">
             @include('layouts.footer')
         </footer>
     </div>
 
-
-
     <div class="p-ticker p-ticker__news-scroller p-ticker__news-scroller__platform  hidden-logged-in" data-url="//cdn2.highlow.net/feed/news-en-public.json?t=637477656798648342" data-wrapper-class="p-ticker__news-scroller--inner-wrap" data-speed="60" data-update-interval="120000">
-
-        <div class="p-ticker__news-scroller--not-logged-in-alert">
-            <span class="p-ticker__news-scroller--not-logged-in-alert--mobile-wrapper">
-                <span class="p-ticker__news-scroller--not-logged-in-alert--mobile-inner-wrapper">
-                    <div class="p-ticker__news-scroller--not-logged-in-alert--body">
-                        <div class="p-ticker__news-scroller--not-logged-in-alert--title">
-                            Live* Market News headlines and stories are available in real accounts only
-                        </div>
-                        <div class="p-ticker__news-scroller--not-logged-in-alert--sub-title">
-                            Sign-up for free and receive a $50 cash-back
-                        </div>
-                        <img src="/Themes/RTCM/Content/images/news-feed-illustration.png" class="p-ticker__news-scroller--not-logged-in-alert--illustration">
-                    </div>
-                    <div class="p-ticker__news-scroller--not-logged-in-alert--footer">
-                        <a class="p-ticker__news-scroller--not-logged-in-alert--footer-link highlight" href="/GoToExternalLink?place=/account">
-                            Sign me up now!
-                        </a>
-
-                        <span class="p-ticker__news-scroller--not-logged-in-alert--close toggler" data-toggle-class="alert" data-toggle-target=".p-ticker__news-scroller">
-                            <img src="/Themes/RTCM/Content/images/alert-close.png" alt="close">
-                        </span>
-                        <span class="p-ticker__news-scroller--not-logged-in-alert--foot-note">
-                            * feed is delayed on public pages
-                        </span>
-                    </div>
-                </span>
-            </span>
-        </div>
-
-        <div class="p-ticker__news-scroller__platform--toggle">
-            <div class="p-ticker__news-scroller__platform--toggle--tooltip">
-                Market News is hidden. <br>
-                <a class=" toggler" data-toggle-class="off" data-toggle-target=".p-ticker__news-scroller__platform" onclick="$.cookie('newsbar', 'on');">Show Market News</a>
-            </div>
-        </div>
-
-
         <div class="p-ticker--wrapper">
 
             <div class="p-ticker--inner-wrap p-ticker__news-scroller--inner-wrap active" style="width: 9466px; left: -7425px;"></div>
@@ -1115,16 +955,10 @@
                     <span class="p-ticker__news-scroller--item-date">09/14/2020</span>
                     <span class="p-ticker__news-scroller--item-category">AUSSIE TECHS: Still In A Corrective Phase:&nbsp;</span>
                     <span class="p-ticker__news-scroller--item-brief">AUSSIE TECHS: Still In A Corrective Phase * RES 4: 0.7464 High Jul 25, 2018 * R…</span>
-
-
                 </div>
             </marquee>
-
         </div>
     </div>
-
-
-    <div class="onboarding-overlay"></div>
 
 </body>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
@@ -2216,6 +2050,8 @@
         },
     ];
 
+    //var data = ['2018-10-19',10.10,15.15,20.20,25.25]
+
     candleSeries.setData(data);
 
     var lastClose = data[data.length - 1].close;
@@ -2321,5 +2157,4 @@
         }
     }, 25000);
 </script>
-
 </html>

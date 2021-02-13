@@ -41,20 +41,21 @@ class InvestmentController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
-            'bid_state_button' => 'required',
-            'amount' => 'required',
+            'state_button' => 'required',
+            'amount' => 'required'
         ]);
 
         $insert_data = array(
             'user_id' => auth()->user()->id,
-            'bis_state' => $request['bid_state_button'],
-            'invested_amount' => $request['amount'],
+            'bid_state' => $request['state_button'],
+            'invested_amount' => $request['amount']
         );
+        dd($insert_data);
         $invest = new Investment($insert_data);
         $invest->save();
-        return redirect()->route('index')
-            ->with('success', 'Divisional Secretariat added succesfully.');
+        return redirect()->back()->with('success', 'Divisional Secretariat added succesfully.');
     }
 
     /**

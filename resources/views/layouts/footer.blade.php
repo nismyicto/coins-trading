@@ -80,7 +80,9 @@
                 </div>
             </div>
             <div class="clearfix">
-                <div class="col-xs-12 keyline"></div>
+                <div class="row keyline">
+
+                </div>
                 <div class="row">
                     <div class="col-sm-9 first-child">
                         <div class="headed-list small-text pull-left">

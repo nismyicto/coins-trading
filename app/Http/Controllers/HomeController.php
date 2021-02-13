@@ -54,19 +54,4 @@ class HomeController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function invest(Request $request, User $user)
-    {
-        $user_data = $request->validate([
-            'coins' => ''
-        ]);
-        $coins = $user->coins - $request->amount;
-        $coins_array = ['coins' => $coins];
-        
-        auth()->user()->update(array_merge(
-            $user_data,
-            $coins_array ?? []
-        ));
-
-        return redirect()->back()->with(['status' => 'Invested successfully.']);
-    }
 }
