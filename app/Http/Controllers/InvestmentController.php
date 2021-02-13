@@ -52,7 +52,7 @@ class InvestmentController extends Controller
             'bid_state' => $request['state_button'],
             'invested_amount' => $request['amount']
         );
-        dd($insert_data);
+        //dd($insert_data);
         $invest = new Investment($insert_data);
         $invest->save();
         return redirect()->back()->with('success', 'Divisional Secretariat added succesfully.');
