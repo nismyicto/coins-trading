@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserBid;
+
 use Illuminate\Http\Request;
 
 class TradeController extends Controller
 {
-    //
+
+    private $profit_percentage;
+    private $user;
+
     public function __construct()
     {
-       
+        $this->profit_percentage = 105;
+        $this->user = \Auth::user();
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,227 +32,144 @@ class TradeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function addtrade(Request $request)
     {
-        //
-/**
- * mama ewanne javascript obejct ekak dataSet kiyala eka oya wena wenama kada ganna
- * dataSet eke print_r ekak damma ma array ekakin ei
- * 
- * Array structure eka
- * 
- * $dataSet = array(
- *          "user_bid" =>#####,
- *          "high_or_low" =>#####,
- *          "auto_close_time" =>#####
- * 
- * 
- * );
- * 
- */
-        $dataSet = $request->object;
-        print_r($dataSet);
-
-        
-//Array be like
-$results = array(
-    "status" => 'success or not'
-
-);
-
-$response = array();
-
-$response['result'] = $results;
-        // Paramters tika
         /**
-         * @ 
-         * 
+         *
+         * array
+         *
+         * high_or_low
+         * amount
+         * auto_close_time
+         * user_bid
          */
 
-         return response()->json($response);
+        $data = $request->object;
 
+        if (!empty($data)) {
+            $bid = UserBid::create($data);
+            $response['result'] = array(
+                'status' => 'success',
+                'bid' => $bid,
+                'session_id' => $request->session()->getId()
+            );
+        } else {
+            $response['result'] = array(
+                'status' => 'failed',
+                'session_id' => $request->session()->getId()
+            );
+        }
 
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
+        return response()->json($response);
+
     }
 
     public function close_manual(Request $request)
     {
-        //
-/**
- * mama ewanne javascript obejct ekak dataSet kiyala eka oya wena wenama kada ganna
- * dataSet eke print_r ekak damma ma array ekakin ei
- * 
- * Array structure eka
- * 
- * $dataSet = array(
- *          "current_bid" =>#####
- * 
- * 
- * );
- * 
- */
-        $dataSet = $request->object;
-        print_r($dataSet);
-
-        /**
-         * 
-         * Mata json eka encode karala response eka ewanna
-         * 
-         * 
-         * response eke 
-         * profit eka ho paduwa
-         * user thiyapu bid eka
-         * close wechcha bid
-         */
-
-//Array be like
-$results = array(
-    "total_profit" => 'account balance eka',
-    "closing_bid" => 'close wena bid eke value eka',
-
-);
 
 
-$response = array();
-$results_bid = array();
-
-//Array be like
-$results_bid[0]['bid_value'] = "user thipu bid eka";
-$results_bid[0]['profit'] = "e adala bid eke adala profit eka";
-$results_bid[1]['bid_value'] = "user thipu bid eka";
-$results_bid[1]['profit'] = "e adala bid eke adala profit eka";
-$results_bid[2]['bid_value'] = "user thipu bid eka";
-$results_bid[2]['profit'] = "e adala bid eke adala profit eka";
-
-$response['result'] = $results;
-$response['user_bids'] = $results_bid;
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
-
-         return response()->json($response);
-
-
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
     }
+
     public function close_auto(Request $request)
     {
-        //
-/**
- * mama ewanne javascript obejct ekak dataSet kiyala eka oya wena wenama kada ganna
- * dataSet eke print_r ekak damma ma array ekakin ei
- * 
- * Array structure eka
- * 
- * $dataSet = array(
- *          "current_bid" =>#####
- * 
- * 
- * );
- * 
- */
-        $dataSet = $request->object;
-        print_r($dataSet);
 
-        
         /**
-         * 
-         * Mata json eka encode karala response eka ewanna
-         * 
-         * 
-         * response eke 
-         * profit eka ho paduwa
-         * user thiyapu bid eka
-         * close wechcha bid
+         * array
+         *
+         * closing_bid
+         *
          */
+        $data = $request->object;
+
+        if (!empty($data)) {
+            $all_closed_bids = array();
+
+            $all_open_bids = UserBid::where('user_id', $this->user->id)
+                ->where('auto_close_time', '>=', now());
+
+            foreach ($all_open_bids as $bid) {
+
+                if ($bid->high_or_low == "high") {
+                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    if ($pro_bid_value > 0) {
+                        $profit = ($bid->amount / 100) * $this->profit_percentage;
+                    } else {
+                        $profit = -1 * $bid->amount;
+                    }
+
+                    //update user bid
+                    $user_bid = UserBid::find($bid->id);
+                    $user_bid->profit = $profit;
+                    $user_bid->closing_bid = $data->closing_bid;
+                    $all_closed_bids[] = $user_bid->update();
+
+                    //update user acc balance
+                    $user = User::find($this->user->id);
+                    $user->coins += $profit;
+                    $user->update();
 
 
+                } else {
+                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    if ($pro_bid_value < 0) {
+                        $profit = ($bid->amount / 100) * $this->profit_percentage;
+                    } else {
+                        $profit = -1 * $bid->amount;
+                    }
 
-//Array be like
-$results = array(
-    "profit" => 'account balance eka',
-    "closing_bid" => 'close wena bid eke value eka',
+                    //update user bid
+                    $user_bid = UserBid::find($bid->id);
+                    $user_bid->profit = $profit;
+                    $user_bid->closing_bid = $data->closing_bid;
+                    $user_bid->update();
 
-);
+                    //update user acc balance
+                    $user = User::find($this->user->id);
+                    $user->coins += $profit;
+                    $all_closed_bids[] = $user->update();
+
+                }
 
 
-$response = array();
-$results_bid = array();
+            }
 
-//Array be like
-$results_bid[0]['bid_value'] = "user thipu bid eka";
-$results_bid[0]['profit'] = "e adala bid eke adala profit eka";
-$results_bid[1]['bid_value'] = "user thipu bid eka";
-$results_bid[1]['profit'] = "e adala bid eke adala profit eka";
-$results_bid[2]['bid_value'] = "user thipu bid eka";
-$results_bid[2]['profit'] = "e adala bid eke adala profit eka";
+            $response['result'] = array(
+                'status' => 'success',
+                'all_closed_bids' => $all_closed_bids,
+                'user_acc_bal' => \Auth::user()->coins
+            );
 
-$response['result'] = $results;
-$response['user_bids'] = $results_bid;
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
+            return response()->json($response);
+        } else {
+            $response['result'] = array(
+                'status' => 'failed',
+                'user_acc_bal' => \Auth::user()->coins
+            );
 
-         return response()->json($response);
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
+            return response()->json($response);
+        }
+
+
     }
 
 
     public function user_account()
     {
 
-        /**
-         * 
-         * Mata json eka encode karala response eka ewanna
-         * 
-         * 
-         * response eke 
-         * current balance eka account eke
-         * last transcation time
-         * user ge details tika
-         */
+        $results = array(
+            "current_balance" => \Auth::user()->coins,
+            "last_transaction" => UserBid::where('user_id', $this->user->id)->orderByDesc('id')->first(),
+            "user_name" => $this->user->name
+        );
 
+        $response = array();
 
-//Array be like
-$results = array(
-    "current_balance" => 'account balance eka',
-    "last_transaction" => 'time eka danna',
-    "user_name" => 'user ge name'
+        $response['result'] = $results;
 
-);
-
-$response = array();
-
-$response['result'] = $results;
-        // Paramters tika
-        /**
-         * @ 
-         * 
-         */
-
-         return response()->json($response);
+        return response()->json($response);
     }
-
-
-    
 
 
 }
