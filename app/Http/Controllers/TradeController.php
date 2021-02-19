@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserBid;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TradeController extends Controller
 {
 
     private $profit_percentage;
-    private $user;
 
     public function __construct()
     {
         $this->profit_percentage = 105;
-        $this->user = \Auth::user();
     }
 
     /**
@@ -49,6 +49,8 @@ class TradeController extends Controller
         $data = $request->object;
 
         if (!empty($data)) {
+            $data['user_id'] = Auth::user()->id;
+            $data['session_id'] = $request->session()->getId();
             $bid = UserBid::create($data);
             $response['result'] = array(
                 'status' => 'success',
@@ -86,7 +88,7 @@ class TradeController extends Controller
         if (!empty($data)) {
             $all_closed_bids = array();
 
-            $all_open_bids = UserBid::where('user_id', $this->user->id)
+            $all_open_bids = UserBid::where('user_id', Auth::user()->id)
                 ->where('auto_close_time', '>=', now());
 
             foreach ($all_open_bids as $bid) {
@@ -106,7 +108,7 @@ class TradeController extends Controller
                     $all_closed_bids[] = $user_bid->update();
 
                     //update user acc balance
-                    $user = User::find($this->user->id);
+                    $user = User::find(Auth::user()->id);
                     $user->coins += $profit;
                     $user->update();
 
@@ -126,7 +128,7 @@ class TradeController extends Controller
                     $user_bid->update();
 
                     //update user acc balance
-                    $user = User::find($this->user->id);
+                    $user = User::find(Auth::user()->id);
                     $user->coins += $profit;
                     $all_closed_bids[] = $user->update();
 
@@ -160,8 +162,8 @@ class TradeController extends Controller
 
         $results = array(
             "current_balance" => \Auth::user()->coins,
-            "last_transaction" => UserBid::where('user_id', $this->user->id)->orderByDesc('id')->first(),
-            "user_name" => $this->user->name
+            "last_transaction" => UserBid::where('user_id', Auth::user()->id)->orderByDesc('id')->first(),
+            "user_name" => Auth::user()->name
         );
 
         $response = array();

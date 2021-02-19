@@ -16,7 +16,7 @@ class CreateUserBidsTable extends Migration
         Schema::create('user_bids', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('session_id');
+            $table->string('session_id');
             $table->string('high_or_low');
             $table->float('user_bid');
             $table->integer('amount');
