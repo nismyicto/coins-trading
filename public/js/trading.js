@@ -13,6 +13,7 @@ app.controller('tradeCtr', function($scope, $http, $filter) {
   $(document).ready(function(){
     readyBro();
     $scope.rapidly();
+    $scope.user();
     
   });
 
@@ -64,6 +65,9 @@ var round_time = timing_closeing_set;
         }
 $scope.showamount = amount;
 $scope.show_pro = amount/100 * 105;
+
+
+//HTTP REQUEST
         $http({
           url: '/addtrading',
           method: 'POST',
@@ -81,8 +85,9 @@ $scope.show_pro = amount/100 * 105;
            bids_total.push(object);
           $scope.items_list = bids_total;
           console.log($scope.items_list);
-
+          $scope.user();
       }, function errorCallback(response) {
+        $scope.user();
           // called asynchronously if an error occurs
           // or server returns response with an error status.
           //  $.notify({ message: response.data.results},{ type: 'danger'});
@@ -126,11 +131,12 @@ $scope.rapidly = function () {
           
             $scope.items_list = null;
             console.log($scope.items_list);
-  
+            $scope.user();
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
             //  $.notify({ message: response.data.results},{ type: 'danger'});
+            $scope.user();
         });
     } else {
         
@@ -141,6 +147,31 @@ $scope.rapidly = function () {
 
 }
 
+
+$scope.user = function () {
+    
+//HTTP REQUEST
+$http({
+    url: '/user',
+    method: 'GET'
+
+}).then(function successCallback(response) {
+    // this callback will be called asynchronously
+    // when the response is available
+console.log(response);
+$scope.user_details = response.data.result;  
+$scope.balance = response.data.result.current_balance;  
+$scope.trasn_time = response.data.result.last_transaction;  
+$scope.user = response.data.result.user_name;  
+
+}, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+    //  $.notify({ message: response.data.results},{ type: 'danger'});
+});
+
+    
+}
 
 $scope.closing = function () {
     var hef_d = hefflybidvalue();
