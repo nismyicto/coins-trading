@@ -34,8 +34,14 @@ var m = d.getMinutes();
 var m_near = Math.ceil(m/5)*5;
 var s = d.getSeconds();
 var s_near = "00";
-var timing_set = h+":"+m+":"+s;
-var timing_closeing_set = h+":"+m_near+":"+s_near
+
+    var yard = d.getFullYear();
+    var ndate =("0" + d.getDate()).slice(-2);
+    var nmonth = ("0" + (d.getMonth() + 1)).slice(-2);
+
+
+var timing_set = yard+"-"+nmonth+"-"+ndate+" "+h+":"+m+":"+s;
+var timing_closeing_set = yard+"-"+nmonth+"-"+ndate+" "+h+":"+m_near+":"+s_near
 var round_time = timing_closeing_set;
 
 
@@ -85,8 +91,10 @@ $scope.show_pro = amount/100 * 105;
            bids_total.push(object);
           $scope.items_list = bids_total;
           console.log($scope.items_list);
+           $("#hefly").notify("Successfully BID added",'Success');
           $scope.user();
       }, function errorCallback(response) {
+        $("#hefly").notify("Failed to add BID ");
         $scope.user();
           // called asynchronously if an error occurs
           // or server returns response with an error status.
@@ -106,8 +114,12 @@ $scope.rapidly = function () {
     var m_near = Math.ceil(m/5)*5;
     var s = d.getSeconds();
     var s_near = 00;
- var timing_set = h+":"+m+":"+s;
- var timing_closeing_set = h+":"+m_near+":"+s_near
+    var yard = d.getFullYear();
+    var ndate =("0" + d.getDate()).slice(-2);
+    var nmonth = ("0" + (d.getMonth() + 1)).slice(-2);
+
+ var timing_set = yard+"-"+nmonth+"-"+ndate+" "+h+":"+m+":"+s;
+ var timing_closeing_set =  yard+"-"+nmonth+"-"+ndate+" "+h+":"+m_near+":"+s_near
     var round_time = timing_closeing_set;
     if (timing_set == timing_closeing_set) {
         console.log("wade hari");
@@ -140,7 +152,6 @@ $scope.rapidly = function () {
         });
     } else {
         
-        console.log("wade kela wela");
       
     }
 
@@ -158,6 +169,10 @@ $http({
 }).then(function successCallback(response) {
     // this callback will be called asynchronously
     // when the response is available
+
+    if(response.data.result.is_logged == false){
+        window.location.href = "../login";
+    }else{}
 console.log(response);
 $scope.user_details = response.data.result;  
 $scope.balance = response.data.result.current_balance;  
