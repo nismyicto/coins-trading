@@ -13,7 +13,8 @@ app.controller('tradeCtr', function($scope, $http, $filter) {
   $(document).ready(function(){
     readyBro();
     $scope.rapidly();
-    $scope.user();
+    $scope.user_data();
+    $scope.get_opemning();
     
   });
 var account_balance;
@@ -96,10 +97,10 @@ $scope.show_pro = amount/100 * 105;
           $scope.items_list = bids_total;
           console.log($scope.items_list);
            $("#hefly").notify("Successfully BID added","success");
-          $scope.user();
+          $scope.user_data();
       }, function errorCallback(response) {
         $("#hefly").notify("Failed to add BID ");
-        $scope.user();
+        $scope.user_data();
           // called asynchronously if an error occurs
           // or server returns response with an error status.
           //  $.notify({ message: response.data.results},{ type: 'danger'});
@@ -157,12 +158,12 @@ $scope.rapidly = function () {
             }else{};
             $scope.items_list = null;
             console.log($scope.items_list);
-            $scope.user();
+            $scope.user_data();
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
             //  $.notify({ message: response.data.results},{ type: 'danger'});
-            $scope.user();
+            $scope.user_data();
         });
     } else {
         
@@ -172,8 +173,27 @@ $scope.rapidly = function () {
 
 }
 
+$scope.get_opemning = function () {
+    $http({
+        url: '/all-opened-trades',
+        method: 'GET'
+     
 
-$scope.user = function () {
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log( response.data.result.all_opened_trades);
+     $scope.items_list = response.data.result.all_opened_trades;
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        //  $.notify({ message: response.data.results},{ type: 'danger'});
+     
+    });
+}
+
+
+$scope.user_data = function () {
     
 //HTTP REQUEST
 $http({
@@ -234,8 +254,11 @@ $scope.closing = function () {
         if(fs_profit < 0 ){
             $.notify("Loss coins -"+fs_profit);
         }else{};
+        $scope.user_data();
+
 
     }, function errorCallback(response) {
+        $scope.user_data();
         // called asynchronously if an error occurs
         // or server returns response with an error status.
         //  $.notify({ message: response.data.results},{ type: 'danger'});

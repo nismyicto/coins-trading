@@ -791,8 +791,8 @@
                                                                                             <span>$</span>
                                                                                             <input type="text" maxlength="10" name="amount" id="amount" ng-model="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
                                                                                         </div>
-                                                                                        <div id="hefly"></div>
-                                                                                        <div class="amount-area trading-platform-main-controls-common-amount">
+                                                                                        <div id="hefly"></div> <br>
+                                                                                        <div hidden class="amount-area trading-platform-main-controls-common-amount">
                                                                                             <div class="defaultAmount" val="50" onclick="myFunction50()">$50</div>
                                                                                             <div class="defaultAmountSeparator"></div>
                                                                                             <div class="defaultAmount" val="100" onclick="myFunction100()">$100</div>
