@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport"  name="csrf-token" content="{{ csrf_token() }}" >
 
     <title>HighLow</title>
 
@@ -17,18 +18,19 @@
     <!-- <link href="{{url('/css/dropdm.css')}}" rel="stylesheet" /> -->
     <link href="{{url('/css/custom.css')}}" rel="stylesheet" />
     <link href="{{url('/css/footer.css')}}" rel="stylesheet" />
-
-   <!-- <script src="{{ asset('js/angular.min.js') }}" defer></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js" defer></script>
-    <script src="{{ asset('js/trading.js') }}" defer></script>
-    
+    <script src="/js/app.js"></script>
+   <script src="{{ asset('js/angular.js') }}" defer></script>
+   <script src="{{ asset('js/angular-route.js') }}" defer></script>
+   <script src="{{ asset('js/notify.js') }}" defer></script>
+   
+<script src="{{ asset('js/trading.js') }}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-
-<script src="{{ asset('js/chartmoment.js') }}" defer></script>
+<!--
+<script src="{{ asset('js/chartmoment.js') }}" defer></script> -->
 </head>
-
 <body class="non-responsive language-en-us cashbackCurrency-36 userCurrency-392">
-<div ng-app="tradingApp" ng-controller="tradeCtr">
+<div ng-app="tradingApp" ng-controller="tradeCtr" >
     <noscript>
         <iframe src="//www.googletagmanager.com/ns.html?id=GTM-54TR9PV" height="0" width="0" style="display: none; visibility: hidden"></iframe>
     </noscript>
@@ -782,13 +784,14 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <form action="{{route('invest.store')}}" method="POST" enctype="multipart/form-data">
+                                                                                <form method="POST" enctype="multipart/form-data">
                                                                                     {{ csrf_field() }}
                                                                                     <div class="sums">
                                                                                         <div class="amountBox trading-platform-main-controls-investment font-m">
                                                                                             <span>$</span>
-                                                                                            <input type="text" maxlength="10" name="amount" id="amount" name="subGraph-sum-input" class="number-only eng first-child last-child" required>
+                                                                                            <input type="text" maxlength="10" name="amount" id="amount" ng-model="amount" name="subGraph-sum-input" class="number-only eng first-child last-child">
                                                                                         </div>
+                                                                                        <div id="hefly"></div>
                                                                                         <div class="amount-area trading-platform-main-controls-common-amount">
                                                                                             <div class="defaultAmount" val="50" onclick="myFunction50()">$50</div>
                                                                                             <div class="defaultAmountSeparator"></div>
@@ -836,35 +839,39 @@
                                                                                     </div>
                                                                                     <div class="invest-area clearfix trading-platform-main-controls-options none-one-click-control">
                                                                                         <div class="trading-platform-main-controls-select-direction first-child">
-                                                                                            <div class="subGraph-updown">
-                                                                                                <label>
-                                                                                                    <input type="radio" name="state_button" value="H" style="display: block;" required>
-                                                                                                    <label type="button" class="up button" id="up_button">High</label>
+                                                                                            <div class="btn-group btn-group-toggle" id="setting_up" data-toggle="buttons">
+                                                                                                <label class="btn btn-secondary"  style="background: green;">
+                                                                                                    <input type="radio" name="options" id="option2" value="high" autocomplete="off"> High
                                                                                                 </label>
-                                                                                                <label>
-                                                                                                    <input type="radio" name="state_button" value="L" style="display: block;">
-                                                                                                    <button type="button" class="dwn button" id="down_button">Low</button>
+                                                                                                <label class="btn btn-secondary"  style="background: red;">
+                                                                                                    <input type="radio" name="options" id="option3" value="low" autocomplete="off"> Low
                                                                                                 </label>
-                                                                                            </div>
+                                                                                                </div>
                                                                                         </div>
                                                                                         <div class="invest-btn trading-platform-main-controls-place-bet last-child">
-                                                                                            <button type="submit" class="invest investNow_disabled button" id="invest_now_button" style="display: block;">Invest</button>
+                                                                                            <button ng-click="confirm();" class="invest investNow_disabled button" id="invest_now_button" style="display: block;">Invest</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </form>
 
                                                                                 <div class="trading-platform-main-controls-payout">
-                                                                                    <div class="pull-left font-sb first-child">Payout</div>
+                                                                                    <div class="pull-left font-sb first-child">Investment</div>
                                                                                     <div class="pull-right last-child">
-                                                                                        <span id="PayoutIn" class="trading-platform-main-controls-payout-rate eng first-child last-child">1.90</span>
+                                                                                        <span id="PayoutIn" class="trading-platform-main-controls-payout-rate eng first-child last-child">[[showamount]]</span>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="trading-platform-main-controls-return last-child">
-                                                                                    <div class="pull-left font-sb first-child">Return</div>
-                                                                                    <div id="cashPayout" class="pull-right trading-platform-maximum-return eng last-child">$19</div>
+                                                                                    <div class="pull-left font-sb first-child">Profit Rate</div>
+                                                                                    <div id="cashPayout" class="pull-right trading-platform-maximum-return eng last-child">5%</div>
                                                                                 </div>
+                                                                                <div class="trading-platform-main-controls-return last-child">
+                                                                                    <div class="pull-left font-sb first-child">Amount with expected profit</div>
+                                                                                    <div id="cashPayout" class="pull-right trading-platform-maximum-return eng last-child">[[show_pro]]</div>
+                                                                                </div>
+                                                                                <br>
                                                                                 <div class="clear"></div>
-                                                                            </div>
+                                                                                <br>
+                                                                                <br>
                                                                             <div class="trading-platform-disabled-mode trading-ticket-view hiddenArea" style="display: none;">
                                                                                 <div class="trading-platform-disabled-title">Trading is closed</div>
                                                                                 <div class="trading-platform-disabled-timer-countdown">
@@ -921,11 +928,36 @@
                                         </div>
                                         <div class="tradeActionsTableArea panel-body last-child">
                                             <div class="trading-platform-investments-list-no-data first-child">
-                                                You have no active trades
+                                            <table class="table table-dark" style="font-size: 15px;">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col" style="text-align: center;">BID value</th>
+                                                <th scope="col" style="text-align: center;">Closing time</th>
+                                                <th scope="col" style="text-align: center;">Investent amount</th>
+                                                <th scope="col" style="text-align: center;">Status</th>
+                                                <th scope="col" style="text-align: center;">Profit Rate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="hexa_items in items_list">
+                                                <th scope="row">[[$index+1]]</th>
+                                                <td>[[hexa_items.user_bid | number : 4]]</td>
+                                                <td>[[hexa_items.auto_close_time]]</td>
+                                                <td>[[hexa_items.amount | number : 2]]</td>
+                                                <td>[[hexa_items.high_or_low]]</td>
+                                                <td>5%</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                            </table>
+                                            <button type="button" class="btn btn-danger" style="color: white;" ng-click="closing()">Close All</button>
                                                 <div id="example"></div>
-                                                <script src="/js/app.js"></script>
+                                              
                                             </div>
-                                            <div id="tradeActionsTableArea" class=""></div>
+                                            <div id="tradeActionsTableArea" class="">
+                                           
+                                            </div>
                                         </div>
                                     </div>
                                 </section>

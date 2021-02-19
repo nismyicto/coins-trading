@@ -1203,7 +1203,7 @@
 
     $(document).ready(function(){
         $.ajax({
-         //   url: "{{route('stautsofuser')}}", 
+          //  url: "{{route('stautsofuser')}}", 
             url: "./user", 
             type : "get",
             success: function(result){
