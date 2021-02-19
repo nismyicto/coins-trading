@@ -160,11 +160,18 @@ class TradeController extends Controller
     public function user_account()
     {
 
-        $results = array(
-            "current_balance" => \Auth::user()->coins,
-            "last_transaction" => UserBid::where('user_id', Auth::user()->id)->orderByDesc('id')->first(),
-            "user_name" => Auth::user()->name
-        );
+        if (\auth()->user()) {
+            $results = array(
+                "current_balance" => \Auth::user()->coins,
+                "last_transaction" => UserBid::where('user_id', Auth::user()->id)->orderByDesc('id')->first(),
+                "user_name" => Auth::user()->name,
+                'is_logged' => true
+            );
+        } else {
+            $results = array(
+                'is_logged' => false
+            );
+        }
 
         $response = array();
 
