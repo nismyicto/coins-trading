@@ -52,6 +52,11 @@ class TradeController extends Controller
             $data['user_id'] = Auth::user()->id;
             $data['session_id'] = $request->session()->getId();
             $bid = UserBid::create($data);
+
+            $user = User::find(\auth()->user()->id);
+            $user->coins -= $data['amount'];
+            $user->update();
+
             $response['result'] = array(
                 'status' => 'success',
                 'bid' => $bid,
