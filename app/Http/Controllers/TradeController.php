@@ -74,21 +74,26 @@ class TradeController extends Controller
         /**
          * array
          *
-         * closing_bid
+         * current_bid
          *
          */
+
         $data = $request->object;
+        $profit = 0;
 
         if (!empty($data)) {
             $all_closed_bids = array();
 
+
             $all_open_bids = UserBid::where('user_id', Auth::user()->id)
-                ->where('auto_close_time', '>=', now());
+                ->where('auto_close_time', '>=', now())
+                ->where('closing_bid', null)
+                ->get();
 
             foreach ($all_open_bids as $bid) {
 
                 if ($bid->high_or_low == "high") {
-                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    $pro_bid_value = $data['current_bid'] - $bid->user_bid;
                     if ($pro_bid_value > 0) {
                         $profit = ($bid->amount / 100) * $this->profit_percentage;
                     } else {
@@ -98,8 +103,10 @@ class TradeController extends Controller
                     //update user bid
                     $user_bid = UserBid::find($bid->id);
                     $user_bid->profit = $profit;
-                    $user_bid->closing_bid = $data->closing_bid;
-                    $all_closed_bids[] = $user_bid->update();
+                    $user_bid->closing_bid = $data['current_bid'];
+                    $user_bid->update();
+                    $closed_bid = UserBid::find($bid->id);
+                    $all_closed_bids[] = $closed_bid;
 
                     //update user acc balance
                     $user = User::find(Auth::user()->id);
@@ -108,7 +115,7 @@ class TradeController extends Controller
 
 
                 } else {
-                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    $pro_bid_value = $data['current_bid'] - $bid->user_bid;
                     if ($pro_bid_value < 0) {
                         $profit = ($bid->amount / 100) * $this->profit_percentage;
                     } else {
@@ -118,7 +125,7 @@ class TradeController extends Controller
                     //update user bid
                     $user_bid = UserBid::find($bid->id);
                     $user_bid->profit = $profit;
-                    $user_bid->closing_bid = $data->closing_bid;
+                    $user_bid->closing_bid = $data['current_bid'];
                     $user_bid->update();
 
                     //update user acc balance
@@ -130,11 +137,10 @@ class TradeController extends Controller
 
 
             }
-//FInal profit
-$profit_final = 10;
+
             $response['result'] = array(
                 'status' => 'success',
-                'profit' => $profit_final,
+                'profit' => $profit,
                 'all_closed_bids' => $all_closed_bids,
                 'user_acc_bal' => \Auth::user()->coins
             );
@@ -162,17 +168,21 @@ $profit_final = 10;
          *
          */
         $data = $request->object;
+        $profit = 0;
+
 
         if (!empty($data)) {
             $all_closed_bids = array();
 
             $all_open_bids = UserBid::where('user_id', Auth::user()->id)
-                ->where('auto_close_time', '>=', now());
+                ->where('auto_close_time', '>=', now())
+                ->where('closing_bid', null)
+                ->get();
 
             foreach ($all_open_bids as $bid) {
 
                 if ($bid->high_or_low == "high") {
-                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    $pro_bid_value = $data['current_bid'] - $bid->user_bid;
                     if ($pro_bid_value > 0) {
                         $profit = ($bid->amount / 100) * $this->profit_percentage;
                     } else {
@@ -182,8 +192,10 @@ $profit_final = 10;
                     //update user bid
                     $user_bid = UserBid::find($bid->id);
                     $user_bid->profit = $profit;
-                    $user_bid->closing_bid = $data->closing_bid;
-                    $all_closed_bids[] = $user_bid->update();
+                    $user_bid->closing_bid = $data['current_bid'];
+                    $user_bid->update();
+                    $closed_bid = UserBid::find($bid->id);
+                    $all_closed_bids[] = $closed_bid;
 
                     //update user acc balance
                     $user = User::find(Auth::user()->id);
@@ -192,7 +204,7 @@ $profit_final = 10;
 
 
                 } else {
-                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    $pro_bid_value = $data['current_bid'] - $bid->user_bid;
                     if ($pro_bid_value < 0) {
                         $profit = ($bid->amount / 100) * $this->profit_percentage;
                     } else {
@@ -202,7 +214,7 @@ $profit_final = 10;
                     //update user bid
                     $user_bid = UserBid::find($bid->id);
                     $user_bid->profit = $profit;
-                    $user_bid->closing_bid = $data->closing_bid;
+                    $user_bid->closing_bid = $data['current_bid'];
                     $user_bid->update();
 
                     //update user acc balance
@@ -214,11 +226,10 @@ $profit_final = 10;
 
 
             }
-            //FInal profit
-$profit_final = 10;
+
             $response['result'] = array(
                 'status' => 'success',
-                 'profit' => $profit_final,
+                'profit' => $profit,
                 'all_closed_bids' => $all_closed_bids,
                 'user_acc_bal' => \Auth::user()->coins
             );
@@ -245,6 +256,7 @@ $profit_final = 10;
                 "current_balance" => \Auth::user()->coins,
                 "last_transaction" => UserBid::where('user_id', Auth::user()->id)->orderByDesc('id')->first(),
                 "user_name" => Auth::user()->name,
+                "user" => Auth::user(),
                 'is_logged' => true
             );
         } else {
@@ -254,6 +266,22 @@ $profit_final = 10;
         }
 
         $response = array();
+
+        $response['result'] = $results;
+
+        return response()->json($response);
+    }
+
+    public function all_opened_trades()
+    {
+        $all_opened_trades = UserBid::where('user_id', \auth()->user()->id)
+        ->where('closing_bid', null)
+        ->get();
+
+        $results = array(
+            'status' => 'success',
+            'all_opened_trades' => $all_opened_trades
+        );
 
         $response['result'] = $results;
 
