@@ -366,7 +366,7 @@
                                                                                                             <span class="arrows">
                                                                                                                 <span class="trend up" style="display: inline-block;"></span>
                                                                                                             </span>
-                                                                                                            <span class="strike" style="display: inline-block;">104.846</span>
+                                                                                                            <span class="strike" style="display: inline-block;">$ &nbsp;[[balance]]</span>
                                                                                                         </div>
                                                                                                         <div class="downBoundary"></div>
                                                                                                     </div>
@@ -662,7 +662,7 @@
                                                                     <div id="strikeArea" class="strikeArea pull-left first-child">
                                                                         <span id="asset" class="trading-platform-instrument-title font-sb eng first-child">USD/JPY</span>
                                                                         <span id="direction" class="strike-direction trading-platform-instrument-direction up"></span>
-                                                                        <span id="strike" class="trading-platform-instrument-rate eng current-rate">104.848</span>
+                                                                        <span id="strike" class="trading-platform-instrument-rate eng current-rate">$ &nbsp; [[balance]]</span>
                                                                         <span id="pipRange" class="trading-platform-instrument-spread-range last-child eng"></span>
                                                                         <span id="tradingClosed" class="trading-platform-instrument-trading-is-closed">Trading is closed</span>
                                                                         <span id="openingTime" class="trading-platform-instrument-open-time last-child hiddenArea" style="display: none;"></span>
@@ -778,7 +778,7 @@
                                                                                         <div class="pull-right last-child">
                                                                                             <div class="strikeValue">
                                                                                                 <span id="direction" class="up"></span>
-                                                                                                <span class="strike eng">104.848</span>
+                                                                                                <span class="strike eng">$ &nbsp; [[balance]]</span>
                                                                                                 <span class="pipRange eng"></span>
                                                                                             </div>
                                                                                         </div>

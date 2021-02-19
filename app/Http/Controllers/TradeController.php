@@ -71,6 +71,84 @@ class TradeController extends Controller
     public function close_manual(Request $request)
     {
 
+        /**
+         * array
+         *
+         * closing_bid
+         *
+         */
+        $data = $request->object;
+
+        if (!empty($data)) {
+            $all_closed_bids = array();
+
+            $all_open_bids = UserBid::where('user_id', Auth::user()->id)
+                ->where('auto_close_time', '>=', now());
+
+            foreach ($all_open_bids as $bid) {
+
+                if ($bid->high_or_low == "high") {
+                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    if ($pro_bid_value > 0) {
+                        $profit = ($bid->amount / 100) * $this->profit_percentage;
+                    } else {
+                        $profit = -1 * $bid->amount;
+                    }
+
+                    //update user bid
+                    $user_bid = UserBid::find($bid->id);
+                    $user_bid->profit = $profit;
+                    $user_bid->closing_bid = $data->closing_bid;
+                    $all_closed_bids[] = $user_bid->update();
+
+                    //update user acc balance
+                    $user = User::find(Auth::user()->id);
+                    $user->coins += $profit;
+                    $user->update();
+
+
+                } else {
+                    $pro_bid_value = $data->closing_bid - $bid->user_bid;
+                    if ($pro_bid_value < 0) {
+                        $profit = ($bid->amount / 100) * $this->profit_percentage;
+                    } else {
+                        $profit = -1 * $bid->amount;
+                    }
+
+                    //update user bid
+                    $user_bid = UserBid::find($bid->id);
+                    $user_bid->profit = $profit;
+                    $user_bid->closing_bid = $data->closing_bid;
+                    $user_bid->update();
+
+                    //update user acc balance
+                    $user = User::find(Auth::user()->id);
+                    $user->coins += $profit;
+                    $all_closed_bids[] = $user->update();
+
+                }
+
+
+            }
+//FInal profit
+$profit_final = 10;
+            $response['result'] = array(
+                'status' => 'success',
+                'profit' => $profit_final,
+                'all_closed_bids' => $all_closed_bids,
+                'user_acc_bal' => \Auth::user()->coins
+            );
+
+            return response()->json($response);
+        } else {
+            $response['result'] = array(
+                'status' => 'failed',
+                'user_acc_bal' => \Auth::user()->coins
+            );
+
+            return response()->json($response);
+        }
+
 
     }
 
@@ -136,9 +214,11 @@ class TradeController extends Controller
 
 
             }
-
+            //FInal profit
+$profit_final = 10;
             $response['result'] = array(
                 'status' => 'success',
+                 'profit' => $profit_final,
                 'all_closed_bids' => $all_closed_bids,
                 'user_acc_bal' => \Auth::user()->coins
             );

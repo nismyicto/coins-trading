@@ -9,20 +9,24 @@ function($interpolateProvider) {
 app.controller('tradeCtr', function($scope, $http, $filter) {
 
     $scope.amount = '';
-
+    $scope.items_list == null;
   $(document).ready(function(){
     readyBro();
     $scope.rapidly();
     $scope.user();
     
   });
-
+var account_balance;
   var bids_total = new Array();
 
 
     $scope.confirm = function() {
+        if(account_balance <  $scope.amount){
+            $.notify("Please enter valid amount");
+              return false;
+          }else{};
+     
 
-      
 var d = new Date(); // for now
 d.getHours(); // => 9
 d.getMinutes(); // =>  30
@@ -88,10 +92,10 @@ $scope.show_pro = amount/100 * 105;
           $scope.amount = '';
           document.getElementById('option2').checked = false;
           document.getElementById('option3').checked = false;
-           bids_total.push(object);
+           bids_total.push(response.data.result.bid);
           $scope.items_list = bids_total;
           console.log($scope.items_list);
-           $("#hefly").notify("Successfully BID added",'Success');
+           $("#hefly").notify("Successfully BID added","success");
           $scope.user();
       }, function errorCallback(response) {
         $("#hefly").notify("Failed to add BID ");
@@ -107,7 +111,10 @@ $scope.show_pro = amount/100 * 105;
     }, 1000);
 
 $scope.rapidly = function () {
-   
+    if($scope.items_list == null){
+          return false;
+      }else{};
+
     var d = new Date();
     var h = d.getHours();
     var m = d.getMinutes();
@@ -122,8 +129,7 @@ $scope.rapidly = function () {
  var timing_closeing_set =  yard+"-"+nmonth+"-"+ndate+" "+h+":"+m_near+":"+s_near
     var round_time = timing_closeing_set;
     if (timing_set == timing_closeing_set) {
-        console.log("wade hari");
-        alert("success");
+        
         var hef_d = hefflybidvalue();
         var object = {
             "current_bid" : hef_d
@@ -140,7 +146,15 @@ $scope.rapidly = function () {
         }).then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
-          
+            var fs_profit = response.data.result['profit'];
+           
+            if(fs_profit >= 0 ){
+                $.notify("Profit Gain coins +"+fs_profit,"success");
+            }else{};
+
+            if(fs_profit < 0 ){
+                $.notify("Loss coins -"+fs_profit);
+            }else{};
             $scope.items_list = null;
             console.log($scope.items_list);
             $scope.user();
@@ -178,7 +192,7 @@ $scope.user_details = response.data.result;
 $scope.balance = response.data.result.current_balance;  
 $scope.trasn_time = response.data.result.last_transaction;  
 $scope.user = response.data.result.user_name;  
-
+account_balance = $scope.balance ;
 }, function errorCallback(response) {
     // called asynchronously if an error occurs
     // or server returns response with an error status.
@@ -189,6 +203,10 @@ $scope.user = response.data.result.user_name;
 }
 
 $scope.closing = function () {
+    if($scope.items_list == null){
+        $.notify("No BID to sell");
+          return false;
+      }else{};
     var hef_d = hefflybidvalue();
     var object = {
         "current_bid" : hef_d
@@ -207,6 +225,56 @@ $scope.closing = function () {
         // this callback will be called asynchronously
         // when the response is available
         $scope.items_list = null;
+        var fs_profit = response.data.result['profit'];
+           
+        if(fs_profit >= 0 ){
+            $.notify("Profit Gain coins +"+fs_profit,"success");
+        }else{};
+
+        if(fs_profit < 0 ){
+            $.notify("Loss coins -"+fs_profit);
+        }else{};
+
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        //  $.notify({ message: response.data.results},{ type: 'danger'});
+    });
+    
+}
+
+$scope.closing_one_by = function () {
+    if($scope.items_list == null){
+        $.notify("No BID to sell");
+          return false;
+      }else{};
+    var hef_d = hefflybidvalue();
+    var object = {
+        "current_bid" : hef_d
+    }
+
+
+    $http({
+        url: '/close_manual_one_by_one',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        data: $.param({ object })
+
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        $scope.items_list = null;
+        var fs_profit = response.data.result['profit'];
+           
+        if(fs_profit >= 0 ){
+            $.notify("Profit Gain coins +"+fs_profit,"success");
+        }else{};
+
+        if(fs_profit < 0 ){
+            $.notify("Loss coins -"+fs_profit);
+        }else{};
 
     }, function errorCallback(response) {
         // called asynchronously if an error occurs
